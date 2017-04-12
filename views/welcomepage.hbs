@@ -1,0 +1,34 @@
+<div class="container">
+    <div class = "row">
+        <div class = "headerlogo">
+            <img src="/images/keepstock.jpg" style="margin-top:1.5%" class="logoimage">
+            <a href="/home/start">
+                <span style="float: right; margin-left: 10px;margin-top:1.2%;margin-right: 2%"> <i class="fa fa-cog fa-3x fa-fw settings"></i> </span>
+            </a>
+        </div>
+        <hr class = "titlehr">
+    </div>
+    <div class="twelve columns" id = "pieChart"style="margin-top: 7%">
+        <div class="twelve columns">
+            <div class="four columns noOfToolsCardHolder"style="background-color: gainsboro;border-radius: 100%;margin-top:0.5%;margin-left:25%;height: 450px;width:450px;">
+                <p id="totalToolsStatus " class="totalToolsCard" style="margin-bottom: 1px;margin-top: 20%">{{totalCheckedOut}}<span id="totalItems" style="font-size: 40%"> OF {{total}}</span> </p>
+                <p style="text-align: center;font-size: xx-large;margin-bottom:1%;color:#3c5b90;"><b>Tools Checked Out</b></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+    //If a successful login takes place via the RFID scan, then navigate to the homepage for the user.
+    var socket = io.connect();
+    socket.on("Login",function(data){
+        window.location.href = "/home";
+    });
+
+    socket.on("Gotit",function(data){
+        console.log(data.msg);
+    })
+
+</script>
+

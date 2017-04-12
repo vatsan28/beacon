@@ -1,0 +1,72 @@
+$('#register_email,#register_password,#register_re_password,#register_company,#register_grainger,#register_firstname,#register_lastname').on('change',function()
+  {
+       console.log("Changed");
+        if ($('#register_password').val().length != 0)
+        {
+             if ($('#register_password').val() === $('#register_re_password').val())
+              {
+                if ($('#register_email').val() != null)
+                {
+                  if ($('#register_company').val != null)
+                  {
+                    if ($('#register_grainger').val() != null)
+                    {
+                      if ($('#register_firstname').val() != null)
+                      {
+                        if ($('#register_lastname').val() != null)
+                        {
+                          console.log($('#register_password').val());
+                          $('#validator').html('You are good to go!.');
+                          $('#validator').css('color','black');
+                          $('#Login_registerButton').disabled = false;
+                        }
+                        else
+                        {
+                          $('#validator').html('We would love to know your last name!');
+                          $('#validator').css('color','red');
+                          $('#Login_registerButton').hide();   
+                        }
+                      }
+                      else
+                      {
+                        $('#validator').html('We would love to know your first name!');
+                        $('#validator').css('color','red');
+                        $('#Login_registerButton').hide();  
+                      }
+                    }
+                    else
+                    {
+                      $('#validator').html('Please fill in your grainger account.');
+                      $('#validator').css('color','red');
+                      $('#Login_registerButton').hide(); 
+                    }
+                  }
+                  else
+                  {
+                    $('#validator').html('Please fill in your company name.');
+                    $('#validator').css('color','red');
+                    $('#Login_registerButton').hide();
+                  }
+                }
+                else
+                {
+                  $('#validator').html('Please fill in your email Id.');
+                  $('#validator').css('color','red');
+                  $('#Login_registerButton').hide();
+                }
+              }
+              else 
+              {
+                console.log($('#register_password').val());
+                console.log($('#register_re_password').val());
+                $('#validator').html('Passwords Do Not Match');
+                $('#validator').css('color', 'red');
+              }
+        }
+        else
+        {  
+          $('#validator').html('Please enter your details');
+          $('#validator').css('color', 'red');
+          $('#Login_registerButton').disabled = true;
+        }
+});

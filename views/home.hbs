@@ -1,0 +1,119 @@
+<div class="container">
+    <div class = "row">
+        <div class = "headerlogo">
+            <img src="/images/keepstock.jpg" style="margin-top:1.5%" class="logoimage">
+            <a href="/home">
+                <span style="float: right; margin-left: 10px;margin-top:1.2%;margin-right: 1%"> <i class="fa fa-cog fa-3x fa-fw settings"></i> </span>
+            </a>
+        </div>
+        <hr class = "titlehr">
+
+        <div class = "userCard twelve columns" style="margin-bottom: 5%;margin-left: 2% ">
+            Hello, {{user}}!
+            <a href="/">
+                <span style="float: right;margin-right: 4%;color:black" ><i class="fa fa-sign-out fa-1x" aria-hidden="true"></i></span>
+                <span style="position: relative;float: right;color: black;margin-right:1% ;margin-top:1%;font-style: normal;font-size: 70%;">Logout</span>
+            </a>
+
+
+        </div>
+        <br>
+        <br>
+        <a style="color:black" href="#workOrderGlove">
+            <div onclick = "dispenseWorkTool('{{workOrderItem.partNo}}');" id = "workCard" class="eleven columns workCard" style="width: 96%" >
+                <div class="seven columns partOneWorkCard" >
+                    <div  class="twelve columns" style="margin-top: 1%;color: #222;font-weight: 800;font-size: large;text-align: center;">
+                        <b>
+                        Work Order:
+                    <span id = "workOrderNumber">
+                        02455145124
+                    </span><br>
+                        Sample work request generated.
+                        </b>
+                    </div>
+                    </div>
+                <div class="four columns partTwoWorkCard">
+                    <div class="four columns"  style="font-size: 60px;color:#D02034;">
+                        <p id = "noOfToolsNeeded" style="margin-left: 80%;line-height: 100%;margin-bottom: 10%;">{{workOrderToolsCount}}</p>
+                    </div>
+                    <div class = "four columns" >
+                        <p style=";margin-top:10px;padding-top:1px;font-size: 20px;padding-left:25px;line-height: 100%;font-weight: 800;"><b>Tool(s) Needed</b></p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div class="twelve columns" style="margin-top: 7%">
+            <a href = "/alltools/returnView">
+                <div id="returnCard" class="four columns panel1">
+                    <button id="return_Button" style="float:right;padding-left:15px;padding-right:15px;border-width: 0%" class="button-primary" type="submit">Return <i class="fa fa-repeat fa-1x" aria-hidden="true"></i></button>
+                    <div class="four columns noOfToolsCardHolder"style="background-color: #E7919A;border-radius: 100%;margin-top:8%;margin-left:18%;height: 175px;width:175px"><p id="numberOfToolsChecked" class="noOfToolsCard">{{checkedOutCount}}</p></div>
+                    <br>
+                    <p style="text-align: center;font-size: larger;margin-top:89.50%;font-weight: 800;"><b>Tools Checked Out</b></p>
+                </div>
+            </a>
+            <a href="/alltools">
+            <div id = "alltools" class="four columns panel1">
+                <img src="/images/settings2.png" style="max-height: 500px;max-width: 200px;margin-left: 15%;margin-top:25%">
+                <p style="text-align: center;font-size: larger;font-weight: 800;"><b>All Tools</b></p>
+            </div>
+            </a>
+            <div class="four columns panel1">
+                <img src="/images/settings3.png" style="max-height: 500px;max-width: 200px;margin-left: 15%;margin-top:25%">
+                <p style="text-align: center;margin-left: 3%;font-size: larger;font-weight: 800;"><b>Tools Locator</b></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="workOrderGlove" class="modalDialog">
+    <a style=" " href="#" title="Close" class="close">X</a>
+    <div class="twelve columns" id = "pieChart"style="margin-top: 15%">
+        <div class ="three columns" style="margin-bottom: 5%;margin-left: 35%">
+            <img style="margin-left:15%;width: 250px;height: 250px" class="unavailableItem"  id="itemToReturn" src="/images/{{{workOrderItem.partNo}}}.jpg" name="{{workOrder.partNo}}">
+            <div style="text-align: center;font-size:x-large;width: 250px;height: 80px;" class = "unavailableItemDescription" style="text-transform: capitalize;" id = "{{workOrderItem.partNo}}">
+                    <span style="margin-left: 10%;text-transform: uppercase;font-family:'Helvetica Neue Light';font-size:large;text-align: center;color: #8bbef3"><b>{{workOrderItem.description}}
+                        <br>
+                        <!--{{workOrderItem.partNo}}-->
+                            <br>
+                            <br>
+                            </b>
+                        </span>
+            </div>
+
+            <div id="returnDoorMsg{{workOrderItem.partNo}}" style="font-family: Helvetica Neue, Helvetica, Arial;text-transform: uppercase;text-align: center;margin-top: 25%;margin-left: 25%;font-family: inherit;font-size: xx-large;color: #6b9aca;">
+                <b>Dispensing...</b>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    //When the page loads, if the total tools checked out is 0 then hide the return button else enable it.
+    $(document).ready(function(){
+        if (document.getElementById("numberOfToolsChecked").innerHTML == "0"){
+            $('#return_Button').css('visibility','hidden');
+            $('#returnCard').attr('href','#');
+        }else{
+            $('#return_Button').css('visibility','visible');
+        }
+        if (document.getElementById("noOfToolsNeeded").innerHTML == "0"){
+            $('#workCard').hide();
+        }else{
+            $('#workCard').show();
+        }
+
+    });
+
+    // Function to dispense the work order tools on clicking the work order card.
+    var socket = io.connect();
+    function dispenseWorkTool(partNo){
+        socket.emit("DispenseWorkOrderTool",{partNo: partNo});
+    }
+
+    //When the door is closed, return to the previous view of the page.
+    socket.on('WorkOrderDoorClose',function(){
+        console.log("Socket emitted");
+        window.location.href="/home";
+    });
+
+</script>

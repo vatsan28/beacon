@@ -1,0 +1,375 @@
+<div class="container">
+    <div class = "row">
+        <div class = "headerlogo">
+            <img src="/images/keepstock.jpg" style="margin-top:1.5%" class="logoimage">
+            <a href="/home">
+                <span style="float: right; margin-left: 10px;margin-top:1.2%;margin-right: 1%"> <i class="fa fa-cog fa-3x fa-fw settings"></i> </span>
+            </a>
+        </div>
+        <hr class = "titlehr">
+        <p>{{message}}</p>
+        <div id="userCard" class = "userCard twelve columns" style="margin-bottom: 5%;margin-left: 2% ">
+            Hello, {{user}}!
+            <a href="/home">
+                <span style="float: right;color: black;margin-right: 5%" ><i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i></span>
+                <span style="position: relative;float: right;color: black;margin-right:1% ;margin-top:1%;font-style: normal;font-size: 70%;">Back</span>
+            </a>
+
+
+        </div>
+      <br>
+      <br>
+    <div id="itemsList" class="twelve columns" style="height: 650px;">
+
+        {{#each availableItems}}
+            <a style="color:black" href="#available{{this.partNo}}" onclick='dispenseItem("{{this.partNo}}","{{../view}}");'>
+            <div class ="three columns" style="margin-bottom: 5%;word-wrap:break-word;">
+                <img style="margin-left:15%" class="availableItem" id="{{this.partNo}}" src="/images/{{{this.partNo}}}.jpg">
+                <div style="float: right;margin-top: -82%;margin-right: 2%">
+                    <i class="fa fa-check fa-2x availableIcons"  style="float:right" aria-hidden="true"></i>
+                </div>
+                <div style="text-align: center" class = "availableItemDescription" id = "{{this.partNo}}">
+                    <div style="float: left;width: 100%;height:100%;text-align: center;">
+                        <span style="text-align: left;margin-left:2%;font-size: 15px"><b>{{this.description}}</b></span><br>
+                    </div>
+                </div>
+            </div>
+            </a>
+            <div id="available{{this.partNo}}" class="modalDialog">
+                <a href="#" title="Close" class="close">X</a>
+               <div class="twelve columns" id = "pieChart"style="margin-top: 15%">
+                    <div class ="three columns" style="margin-bottom: 5%;margin-left: 35%">
+                        <img style="margin-left:15%;width: 250px;height: 250px" class="availableItem"  id="{{this.partNo}}" onclick="dispenseItem('{{this.partNo}}','{{../view}}')" src="/images/{{{this.partNo}}}.jpg">
+                        <div style="text-align: center;font-size:x-large;width: 250px;height: 80px;" class = "availableItemDescription" style="text-transform: capitalize" id ="itemToDispense" name="{{this.partNo}}">
+                        <span style="margin-left: 10%;text-transform: uppercase;font-size:large;text-align: center;color: rgb(46,143,72)"><b>{{this.description}}
+                            <br></b>
+                        </span>
+                            <!--{{this.partNo}}</span>-->
+                            <br>
+                            <br>
+                            </b>
+                        </div>
+                        <div id="dispenseDoorMsg{{this.partNo}}" style="font-family: Helvetica Neue, Helvetica, Arial;text-transform: uppercase;text-align: center;margin-top: 25%;margin-left: 25%;font-size: xx-large;color: rgb(46,143,72);">
+                            <b>Door Opening...</b>
+
+                        </div>
+
+
+                            <div id="toolMissing{{this.partNo}}" style="display: none;margin-left: 20%;margin-top: 10%;height:80px;width: 275px;font-size: large;color: indianred"  onclick="reportMissingTool('{{this.partNo}}')">
+                                <i style= "color:indianred" class="fa fa-2x fa-exclamation-triangle" aria-hidden="true"></i>
+                                <b style="font-size: large;color: indianred">Report missing tool</b>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+
+        {{#each checkedOutByUser}}
+            <a style="color:black" href="#return{{this.partNo}}" onclick='returnItem("{{this.partNo}}","{{../view}}");'>
+                <div class ="three columns" style="margin-bottom: 5%;">
+                    <img style="margin-left:15%" class="unavailableItem" id="{{this.partNo}}" src="/images/{{{this.partNo}}}.jpg">
+                    <div style="border-radius: 100%;margin-right:2%;margin-top:-82.5%;background-color: rgb(0,126,183);float: right;height: 35px;width: 35px">
+                        <i class="unavailableIcons" style="width: 35px;height: 35px;"><i class="fa fa-repeat fa-2x" style="margin-top: 5%;margin-right: 14%;float:right" aria-hidden="true"></i></i>
+                    </div>
+                    <div style="text-align: center" class = "unavailableItemDescription" id = "{{this.partNo}}">
+                        <div style="float: left;width: 100%;height:100%;text-align: center;">
+                            <span style="text-align: left;margin-left:2%;font-size: 15px"><b>{{this.description}}</b></span><br>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div id="return{{this.partNo}}" class="modalDialog">
+                <a  href="#" title="Close" class="close">X</a>
+                <div class="twelve columns" id = "pieChart"style="margin-top: 15%">
+                    <div class ="three columns" style="margin-bottom: 5%;margin-left: 35%">
+                        <img style="margin-left:15%;width: 250px;height: 250px" class="unavailableItem"  id="itemToReturn" src="/images/{{{this.partNo}}}.jpg" onclick="returnItem('{{this.partNo}}','{{../view}}')" name="{{this.partNo}}">
+                        <div style="text-align: center;font-size:x-large;width: 250px;height: 80px;" class = "unavailableItemDescription" style="text-transform: capitalize;" id = "{{this.partNo}}">
+                    <span style="margin-left: 10%;text-transform: uppercase;font-family:'Helvetica Neue Light';font-size:large;text-align: center;color: #8bbef3"><b>{{this.description}}
+                        <br>
+                        <!--{{this.partNo}}-->
+                            <br>
+                            <br>
+                            </b>
+                        </span>
+                        </div>
+
+                        <div id="returnDoorMsg{{this.partNo}}" style="font-family: Helvetica Neue, Helvetica, Arial;text-transform: uppercase;text-align: center;margin-top: 25%;margin-left: 25%;font-family: inherit;font-size: xx-large;color: #6b9aca;">
+                            <b>Door Opening...</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+
+        {{#each checkedOutByOthers}}
+                <div class ="three columns" style="margin-bottom: 5%;word-wrap:break-word;">
+                    <img style="margin-left:15%" class="checkedoutItem" id="{{this.partNo}}" src="/images/{{{this.partNo}}}.jpg">
+                    <div style="float: right;margin-top: -82%;margin-right: 2%">
+                        <i class="fa fa-times-circle fa-2x checkedoutIcons"  style="float:right" aria-hidden="true"></i>
+                    </div>
+                    <div style="text-align: center" class = "checkedoutItemDescription" id = "{{this.partNo}}">
+                        <div style="float: left;width: 100%;height:100%;text-align: center;">
+                            <span style="text-align: left;margin-left:2%;font-size: 15px"><b>{{this.description}}</b></span><br>
+                        </div>
+                    </div>
+                </div>
+        {{/each}}
+        {{#each missingTools}}
+                <div class ="three columns" style="margin-bottom: 5%;word-wrap:break-word;" onclick='missingReplaced("{{this.partNo}}","{{../view}}")';>
+                    <img style="margin-left:15%" class="missingItem" id="{{this.partNo}}" src="/images/{{{this.partNo}}}.jpg">
+                    <div style="float: right;margin-top: -82%;margin-right: 2%">
+                        <i class="fa fa-exclamation-triangle fa-2x missingIcons"  style="float:right" aria-hidden="true"></i>
+                    </div>
+                    <div style="text-align: center" class = "missingItemDescription" id = "{{this.partNo}}">
+                        <div style="float: left;width: 100%;height:100%;text-align: center;">
+                            <span style="text-align: left;margin-left:2%;font-size: 15px"><b>{{this.description}}</b></span><br>
+                        </div>
+                    </div>
+                </div>
+
+        {{/each}}
+        {{#each workOrderToolAvailable}}
+
+                <div id="tool{{this.partNo}}" class ="three columns" style="margin-bottom: 5%;word-wrap:break-word;">
+                    <a style="color:black" href="#available{{this.partNo}}" onclick='dispenseItem("{{this.partNo}}","{{../view}}");'>
+                        <img style="margin-left:15%" class="availableItem" id="{{this.partNo}}" src="/images/{{{this.partNo}}}.jpg">
+                    </a>
+                    <div style="float: right;margin-top: -82%;margin-right: 2%">
+                        <i class="fa fa-check fa-2x availableIcons"  style="float:right" aria-hidden="true"></i>
+                    </div>
+                    <div style="text-align: center" class = "availableItemDescription" id = "{{this.partNo}}">
+                        <div style="float: left;width: 100%;height:100%;text-align: center;">
+                            <span style="text-align: left;margin-left:2%;font-size: 15px"><b>{{this.description}}</b></span><br>
+                        </div>
+                    </div>
+                </div>
+            <div id="available{{this.partNo}}" class="modalDialog">
+                <a href="#" title="Close" class="close">X</a>
+                <div class="twelve columns" id = "pieChart"style="margin-top: 15%">
+                    <div class ="three columns" style="margin-bottom: 5%;margin-left: 35%">
+                        <img style="margin-left:15%;width: 250px;height: 250px" class="availableItem"  id="{{this.partNo}}" onclick="dispenseItem('{{this.partNo}}','{{../view}}')" src="/images/{{{this.partNo}}}.jpg">
+                        <div style="text-align: center;font-size:x-large;width: 250px;height: 80px;" class = "availableItemDescription" style="text-transform: capitalize" id ="itemToDispense" name="{{this.partNo}}">
+                        <span style="margin-left: 10%;text-transform: uppercase;font-size:large;text-align: center;color: rgb(46,143,72)"><b>{{this.description}}
+                            <br></b>
+                        </span>
+                            <!--{{this.partNo}}</span>-->
+                            <br>
+                            <br>
+                            </b>
+                        </div>
+                        <div id="dispenseDoorMsg{{this.partNo}}" style="font-family: Helvetica Neue, Helvetica, Arial;text-transform: uppercase;text-align: center;margin-top: 25%;margin-left: 25%;font-size: xx-large;color: rgb(46,143,72);">
+                            <b>Dispensing...</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+
+
+        {{#each workOrderToolUnavailable}}
+                <div id="tool{{this.partNo}}" class ="three columns" style="margin-bottom: 5%;">
+                    <a style="color:black" href="#return{{this.partNo}}" onclick='returnItem("{{this.partNo}}","{{../view}}");'>
+                    <img style="margin-left:15%" class="unavailableItem" id="{{this.partNo}}" src="/images/{{{this.partNo}}}.jpg">
+                        </a>
+                    <div style="border-radius: 100%;margin-right:1%;margin-top:-82.5%;background-color: rgb(0,126,183);float: right;height: 35px;width: 35px">
+                        <i class="fa fa-repeat fa-2x unavailableIcons" style="margin-top: 30%;margin-right: 8%;float:right" aria-hidden="true"></i>
+                    </div>
+                    <div style="text-align: center" class = "unavailableItemDescription" id = "{{this.partNo}}">
+                        <div style="float: left;width: 100%;height:100%;text-align: center;">
+                            <span style="text-align: left;margin-left:2%;font-size: 15px"><b>{{this.description}}</b></span><br>
+                        </div>
+                    </div>
+                </div>
+                <div id="return{{this.partNo}}" class="modalDialog">
+                <a  href="#" title="Close" class="close">X</a>
+                <div class="twelve columns" id = "pieChart"style="margin-top: 15%">
+                    <div class ="three columns" style="margin-bottom: 5%;margin-left: 35%">
+                        <img style="margin-left:15%;width: 250px;height: 250px" class="unavailableItem"  onclick="returnItem('{{this.partNo}}','{{../view}}')" id="itemToReturn" src="/images/{{{this.partNo}}}.jpg" name="{{this.partNo}}">
+                        <div style="text-align: center;font-size:x-large;width: 250px;height: 80px;" class = "unavailableItemDescription" style="text-transform: capitalize;" id = "{{this.partNo}}">
+                    <span style="margin-left: 10%;text-transform: uppercase;font-family:'Helvetica Neue Light';font-size:large;text-align: center;color: #8bbef3"><b>{{this.description}}
+                        <br>
+                        <!--{{this.partNo}}-->
+                            <br>
+                            <br>
+                            </b>
+                        </span>
+                        </div>
+
+                        <div id="returnDoorMsg{{this.partNo}}" style="font-family: Helvetica Neue, Helvetica, Arial;text-transform: uppercase;text-align: center;margin-top: 25%;margin-left: 25%;font-family: inherit;font-size: xx-large;color: #6b9aca;">
+                            <b>Returning...</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+            <div id="scrollD">
+                <a href="#">
+                    <i id="scrollDown"  class="fa fa-4x fa-angle-double-down" aria-hidden="true"  style="position: fixed;right: 1.6%;top: 90%;color:dimgrey;visibility: visible;"></i>
+                </a>
+            </div>
+            <div id="scrollU">
+                <a href="#">
+                    <i id="scrollUp" class="fa fa-4x fa-angle-double-up" aria-hidden="true"  style="position: fixed;right: 1.6%;top: 90%;color:dimgrey;visibility: hidden"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+  </div>
+<script>
+
+    var socketAllTools = io.connect();
+
+    /* Function to send a dispense item message to the server along with the view it is associated with. Parameters:
+        1. part number.
+        2. View.
+     */
+    function dispenseItem(partNo,view){
+        console.log(partNo,view);
+        sessionStorage.setItem('itemNo',partNo);
+        sessionStorage.setItem('purpose','dispense');
+        socketAllTools.emit("DispensingItem",{partNo: partNo,purpose: "dispense"});
+    }
+
+
+    /* Function to send a return item message to the server along with the view it is associated with. Parameters:
+        1. part number.
+        2. View.
+     */
+    function returnItem(partNo,view){
+        console.log(partNo,view);
+        sessionStorage.setItem('itemNo',partNo);
+        sessionStorage.setItem('purpose','return');
+        socketAllTools.emit("DispensingItem",{partNo: partNo,purpose: "return"});
+    }
+
+    /*
+    When the door is closed, revert back to the all tolls view or the return items view depending on which view the user was previously on.
+     */
+    socketAllTools.on('DoorClosed',function(){
+        console.log(window.location.pathname);
+        if (window.location.pathname == "/alltools"){
+            window.location.href = "/alltools";
+        }else if (window.location.pathname == "/alltools/returnView"){
+            window.location.href = "/alltools/returnView";
+        }
+    });
+
+
+    /*
+    When the door is closed, revert back to the all tolls view or the return items view depending on which view the user was previously on. -- This case is for the work order tool.
+     */
+    socketAllTools.on('WorkOrderDoorCloseInReturn',function(){
+        console.log(window.location.pathname);
+        if (window.location.pathname == "/alltools"){
+            window.location.href = "/alltools";
+        }else if (window.location.pathname == "/alltools/returnView"){
+            window.location.href = "/alltools/returnView";
+        }
+    });
+
+    socketAllTools.on("DeviceLocation",function(data){
+        sessionStorage.setItem('itemLocation',data.deviceLocation);
+        sessionStorage.setItem('doorType',data.doorType);
+        console.log("Stored device location: "+sessionStorage.getItem('itemLocation')+"---"+sessionStorage.getItem('purpose')+"---"+sessionStorage.getItem('doorType'));
+    });
+
+    /*
+    When the door is opened successfully, change the message from door opening to returning or dispensing.
+     */
+    socketAllTools.on("DoorOpened",function(){
+        console.log("Door opened");
+        console.log(sessionStorage.getItem('itemLocation'),sessionStorage.getItem('purpose'),sessionStorage.getItem('doorType'));
+        socketAllTools.emit('LightUpLed',{itemLoc: sessionStorage.getItem('itemLocation'),purpose: sessionStorage.getItem('purpose'),doorType: sessionStorage.getItem('doorType')});
+        var returnTemp = "returnDoorMsg"+sessionStorage.getItem('itemNo');
+        var dispenseTemp = "dispenseDoorMsg"+sessionStorage.getItem('itemNo');
+        var toolMissing = "#toolMissing"+sessionStorage.getItem('itemNo');
+        console.log(toolMissing);
+        if (document.getElementById(returnTemp)){
+            document.getElementById(returnTemp).innerText = "RETURNING...";
+        }else if (document.getElementById(dispenseTemp)){
+            document.getElementById(dispenseTemp).innerText = "DISPENSING...";
+            $(toolMissing).show();
+        }
+        sessionStorage.removeItem('itemLocation');
+        sessionStorage.removeItem('purpose');
+        sessionStorage.removeItem('doorType');
+        sessionStorage.removeItem('itemNo');
+        console.log(sessionStorage.getItem('itemNo'));
+    });
+
+    socketAllTools.on('MissingItemUpdated',function(data){
+        var missingTemp="toolMissing"+data.partNo;
+        document.getElementById(missingTemp).innerText = "Missing item reported. Thank You!";
+        $("#"+missingTemp).css('margin-left','12%');
+//        window.location.reload();
+    });
+    socketAllTools.on('MissingItemReplaceUpdated',function(data){
+        window.location.reload();
+    });
+
+        function reportMissingTool(partNo){
+//            console.log("Missing tool: "+partNo);
+            socketAllTools.emit("MissingTool",{partNo: partNo});
+        }
+
+    function missingReplaced(partNo){
+//        console.log("Missing item replaced."+partNo);
+        socketAllTools.emit("MissingToolReplaced",{partNo: partNo});
+    }
+
+    function openDoorAgain(partNo){
+//        console.log("Opening door again");
+        socketAllTools.emit("DispensingItem",{partNo: partNo,purpose: "return"});
+    }
+
+    $(document).ready(function(){
+        if ($("#scrollDown").ifVisible()){
+//           console.log($("#scrollDown").ifVisible()) ;
+            console.log($("#scrollUp").ifVisible()) ;
+            document.getElementById('scrollUp').style.visibility = "hidden";
+        }else{
+//            console.log($("#scrollUp").ifVisible()) ;
+            document.getElementById('scrollUp').style.visibility = "visible";
+//            console.log($("#scrollUp").ifVisible()) ;
+        }
+    });
+    
+    window.onscroll=function () {
+        var pageLength = $("#itemsList").children().length;
+        var checkBottom= $("#itemsList").children()[pageLength-4].getAttribute('id');
+        var checkBottomElement = $("#"+checkBottom).ifVisible();
+        var checkTopElement = $("#userCard").ifVisible();
+        if (checkBottomElement && checkTopElement){
+//            console.log("Both elements visible");
+            document.getElementById('scrollDown').style.visibility = "hidden";
+            document.getElementById('scrollUp').style.visibility = "hidden";
+        }else if (checkTopElement){
+//            console.log("Top element visible");
+            document.getElementById('scrollUp').style.visibility = "hidden";
+            document.getElementById('scrollDown').style.visibility = "visible";
+        }else if (checkBottomElement){
+//            console.log("Bottom element visible");
+            document.getElementById('scrollUp').style.visibility = "visible";
+            document.getElementById('scrollDown').style.visibility = "hidden";
+        }
+    }
+
+    $.fn.ifVisible =function(){
+        console.log(this);
+        var win = $(window);
+
+        var viewport = {
+            top : win.scrollTop(),
+            left : win.scrollLeft()
+        };
+        viewport.right = viewport.left + win.width();
+        viewport.bottom = viewport.top + win.height();
+        var bounds = this.offset();
+        bounds.right = bounds.left + this.outerWidth();
+        bounds.bottom = bounds.top + this.outerHeight();
+        return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom || this[0].style.visibility == 'hidden'));
+    }
+</script>
+    
+    
