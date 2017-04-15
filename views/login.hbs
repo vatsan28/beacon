@@ -1,0 +1,42 @@
+<div class="container">
+    <div class = "row">
+        <div class="row">
+            <img src="/images/logo_black.png" class="logoimage">
+        </div>
+        <h1>
+            Login
+        </h1>
+        <hr class="titlehr">
+        <p>{{message}}</p>
+        <div class = "six columns">
+            <form id="login_form" action = "authenticate" method = "POST">
+                <h5>
+                    <label for="Email ID">Email Id</label>
+                </h5>
+                <input class="u-full-width" name='email' type="text" placeholder="Please enter your email ID." id="login_email" />
+                <br>
+                <br>
+                <h5>
+                    <label for="Password">Password</label>
+                </h5>
+                <input class="u-full-width" type="password" name = 'password' placeholder="Please enter your password." id="login_password" />
+                <br>
+                <br>
+                <h6>
+                    <label for="login">Click to login.</label>
+                    <button id="Login_loginButton"  class="button-primary" type="submit">Login</button>
+                </h6>
+                <div id="count"></div>
+                <h6>
+                    <div class="twelve columns">
+                        <label style="margin-left:0%" for="register">Click to register a new account.</label>
+                    </div>
+                </h6>
+            </form>
+
+            <a href="register">
+                <button id="Login_registerButton" style="margin-left:0%"  class="button-primary" type="submit">Register</button>
+            </a>
+        </div>
+    </div>
+</div>
