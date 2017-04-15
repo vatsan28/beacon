@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1993db2-fd52-4e90-a3e4-71b6d465e3e3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/login.hbs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/registerProvider.hbs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/registerSeeker.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/vars.js" afterPath="$PROJECT_DIR$/config/vars.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/skeleton.css" afterPath="$PROJECT_DIR$/public/stylesheets/skeleton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/error.hbs" afterPath="$PROJECT_DIR$/views/error.hbs" />
     </list>
     <ignored path="Beacon.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,7 +75,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.hbs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/login.hbs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="481">
@@ -135,11 +128,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vars.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="vars.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/vars.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+              <caret line="3" column="100" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="100" />
               <folding />
             </state>
           </provider>
@@ -160,7 +153,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/config/vars.js" />
         <option value="$PROJECT_DIR$/views/error.hbs" />
         <option value="$PROJECT_DIR$/views/alltools.hbs" />
         <option value="$PROJECT_DIR$/views/login.hbs" />
@@ -168,6 +160,7 @@
         <option value="$PROJECT_DIR$/views/registerProvider.hbs" />
         <option value="$PROJECT_DIR$/views/registerSeeker.hbs" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/config/vars.js" />
       </list>
     </option>
   </component>
@@ -399,12 +392,12 @@
       <updated>1492034888460</updated>
       <workItem from="1492034889988" duration="2240000" />
       <workItem from="1492038488076" duration="1185000" />
-      <workItem from="1492276017348" duration="3795000" />
+      <workItem from="1492276017348" duration="4647000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7216000" />
+    <option name="totallyTimeSpent" value="8068000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -788,14 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/vars.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/skeleton.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -846,6 +831,14 @@
             <element signature="n#style#0;n#label#0;n#div#0;n#h6#1;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#a#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/vars.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="100" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="100" />
+          <folding />
         </state>
       </provider>
     </entry>
