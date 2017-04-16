@@ -16,5 +16,11 @@ router.get('/register', function(req, res, next) {
     res.render('registerSeeker');
 });
 
+router.get('/seekerHome',function(req,res,next) {
+          res.render("seekerHome");
+  });
+
+
+
 
 module.exports = router;
