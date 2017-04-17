@@ -7,22 +7,22 @@
 
  <div class="container">
     
-        <div class="row">
-         <img src="/images/logo_black.png" class="logoimage">
+        <div class="row box-shadow ">
+         <img src="/images/logo_black.png" class="logoimage" style="display: block; margin: 0 auto;">
             
         </div>
         <h1> Welcome User X </h1>
         
         <div class="row">
-            <div class="one column">Search</div>
-            <div class="eleven columns"><input  id="tags"></input></div>
+            <div class="one columns"><h3>Search</h3></div>
+            <div class= "eleven columns"><h4><input id="tags" style="width:100%"></h4></input></div>
         </div>
        
        <div class ="row">
-           <div class="twelve columns"  id="mapid" style="height: 180px;"> </div>
-        </div>  
-        
-    
+           <div class="six columns"  id="mapid" style=" height: 70vh; overflow: hide;"> </div>
+         
+        <div class="six columns" style="  height: 70vh; overflow: scroll;">
+              
     <div id="accordion">
   <h3><p class="provider-name"> :Victoria Pena <!-- Add handle bar for name of person and rating--></p> Recommended : <div id="progressbar1"><div id="progress-label1" class="progress-label">Recommended</div></div> <!--Recommended tells you how many people recommend this person based on the rating they give --></h3>
   <div>
@@ -35,6 +35,7 @@
   <div class="image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample4.jpg" alt="sample4"/></div>
   <div class="position">Illustrator</div>
 </figure>
+<button id="myBtn">Open Modal</button>
   </div>
   <h3><p class="provider-name"> Pam Beesly<!-- Add handle bar for name of person and rating--></p> Recommended : <div id="progressbar2"><div id="progress-label2" class="progress-label">Recommended</div></div> <!--Recommended tells you how many people recommend this person based on the rating they give --></h3>
  <div>
@@ -76,247 +77,40 @@
     Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
     inceptos himenaeos.
     </p>
-  </div>
-</div>           
+       </div>
+          </div>           
 
 
- 
-<p>Date: <input type="text" id="datepicker"></p>
- 
- 
-
-           
+        </div>
         
   </div>
+</div> 
+<!--MODAL AFTER BOOK is clicked-->
+<div id="dialog-message" title="Book Provider" style="width:60%">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+   Pena
+  </p>
+ <figure class="snip0057 red">
+  <figcaption>
+    <h2>Victoria <span>Pena</span></h2>
+    <p>A voice crackles in Calvin's radio: "Enemy fighters at two o'clock!" "Roger. What should I do until then?"</p>
+    <div class="icons"><a href="#"><i class="ion-ios-home"></i></a><a href="#"><i class="ion-ios-email"></i></a><a href="#"><i class="ion-ios-telephone"></i></a></div>
+  </figcaption>
+  <div class="image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample4.jpg" alt="sample4"/></div>
+  <div class="position">Illustrator</div>
+</figure>
+</div>
 
- <style>
-
-     @import url(https://fonts.googleapis.com/css?family=Raleway:400,200,300,800);
-@import url(http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-figure.snip0057 {
-  font-family: 'Raleway', Arial, sans-serif;
-  position: relative;
-  float: left;
-  overflow: hidden;
-  margin: 10px 1%;
-  min-width: 380px;
-  max-width: 480px;
-  width: 100%;
-  background: #ffffff;
-  color: #000000;
-}
-figure.snip0057 * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.35s ease-in-out;
-  transition: all 0.35s ease-in-out;
-}
-figure.snip0057 .image {
-  width: 50%;
-  overflow: hidden;
-  z-index: 1;
-  -webkit-transform: skewX(-15deg);
-  transform: skewX(-15deg);
-}
-figure.snip0057 .image img {
-  position: relative;
-  display: block;
-  left: -15%;
-  z-index: 1;
-  -webkit-transform: skew(15deg);
-  transform: skew(15deg);
-}
-figure.snip0057:before {
-  position: absolute;
-  content: '';
-  height: 100%;
-  width: 45%;
-  background: rgba(0, 0, 0, 0.2);
-  -webkit-transform: skewX(-17deg);
-  transform: skewX(-17deg);
-  -webkit-box-shadow: 15px 0px 25px rgba(0, 0, 0, 0.7);
-  box-shadow: 15px 0px 25px rgba(0, 0, 0, 0.7);
-}
-figure.snip0057 figcaption {
-  padding: 20px 30px 20px 20px;
-  position: absolute;
-  right: 0;
-  bottom: 10px;
-  width: 50%;
-}
-figure.snip0057 figcaption h2,
-figure.snip0057 figcaption p {
-  margin: 0;
-  text-align: right;
-  padding: 10px 0;
-  width: 100%;
-}
-figure.snip0057 figcaption h2 {
-  font-size: 1.3em;
-  font-weight: 300;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-figure.snip0057 figcaption h2 span {
-  font-weight: 800;
-}
-figure.snip0057 figcaption p {
-  font-size: 0.9em;
-  opacity: 0.8;
-}
-figure.snip0057 figcaption .icons {
-  width: 100%;
-  text-align: right;
-}
-figure.snip0057 figcaption .icons i {
-  font-size: 26px;
-  padding: 5px;
-  top: 50%;
-  color: #000000;
-  opacity: 0;
-}
-figure.snip0057 figcaption a {
-  opacity: 0.3;
-}
-figure.snip0057 figcaption a:hover {
-  opacity: 0.8;
-}
-figure.snip0057 .position {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: right;
-  padding: 15px 30px;
-  font-size: 0.9em;
-  opacity: 1;
-  font-style: italic;
-  color: #ffffff;
-  background: #000000;
-}
-figure.snip0057.blue .position {
-  background: #20638f;
-}
-figure.snip0057.red .position {
-  background: #962d22;
-}
-figure.snip0057.yellow .position {
-  background: #bf6516;
-}
-figure.snip0057:hover figcaption,
-figure.snip0057.hover figcaption {
-  bottom: 40px;
-}
-figure.snip0057:hover .icons i,
-figure.snip0057.hover .icons i {
-  opacity: 1;
-  -webkit-transition-delay: 0.2s;
-  transition-delay: 0.2s;
-}
-figure.snip0057:hover:before,
-figure.snip0057.hover:before {
-  -webkit-animation: shadow 0.6s ease-in-out;
-  animation: shadow 0.6s ease-in-out;
-}
-@-webkit-keyframes shadow {
-  0% {
-    left: 0px;
-  }
-  50% {
-    left: -5px;
-  }
-  100% {
-    left: 0px;
-  }
-}
-@keyframes shadow {
-  0% {
-    left: 0px;
-  }
-  50% {
-    left: -5px;
-  }
-  100% {
-    left: 0px;
-  }
-}
-
-     
-#mapid   {
-    
-    position: relative;
-    z-index: 1
-    }
-  .ui-progressbar {
-    position: relative;
-  }
-  .progress-label {
-    position: absolute;
-    left: 50%;
-    top: 4px;
-    font-weight: bold;
-    text-shadow: 1px 1px 0 #fff;
+  <script src="/javascripts/seekerHome.js"></script>
+<link rel='stylesheet' href='/stylesheets/seekerHome.css' />
+<style>
+  .box-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   </style>
 
-
- <script>
-//Progress Bar
-
-$( function() {
-    progressVals=4
-    val=1;
-    console.log(progressVals)
-    while(val<progressVals)
-    {
-        console.log("#progressbar"+val)
-    $( "#progressbar"+val ).progressbar({
-      value:val*10
-     
-    });
-     $("#progress-label"+val).text( val+"/10" );
-    val++;
-    }
-  } );
-
-//DatePicker
-$( function() {
-    $( "#datepicker" ).datepicker({ minDate: -20, maxDate: "+1M +10D" });
-  } );
-$( "#datepicker" ).datepicker( "setDate", "04/16/2017" );
-$( "#datepicker" ).datepicker( "setDate", "04/17/2017" );
-
-//Category Suggestion
-     $( function() {
-    var availableTags = [
-      "Tutor",
-      "Chef",
-      "Web Developer",
-      "Photographer",
-      "Errands"
-    ];
-    $( "#tags" ).autocomplete({
-      source: availableTags
-    });
-  } );
-
-//Accordion 
-
-  $( function() {
-    $( "#accordion" ).accordion();
-  } );
-
-//Leaflet functions
-
-     var map = L.map('mapid').setView([51.505, -0.09], 13);
-
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();
-
-</script>
+ 
 
 
+ 
