@@ -39,6 +39,10 @@ router.post('/authenticate', function(req, res, next) {
     });
 });
 
+router.get('/seekerHome',function(req,res,next) {
+          res.render("seekerHome");
+  });
+
 router.post('/register', function(req, res, next) {
     console.log(req.body);
     // var username = req.body.username;
