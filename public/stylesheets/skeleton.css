@@ -679,9 +679,9 @@ p {
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
-  color: #D02034; }
+  color: #2682ea; }
 a:hover {
-  color: #D02034; }
+  color: #565656; }
 
 
 /* Buttons
@@ -809,7 +809,7 @@ select {
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
   background-image: linear-gradient(to left,white,#E4E4E4 80%);
   border: 1px solid #D1D1D1;
-  border-radius: 30px;
+  border-radius: 100px;
   box-shadow: none;
   box-sizing: border-box; }
 /* Removes awkward default styles on some inputs for iOS */
@@ -969,7 +969,7 @@ hr {
   margin-bottom: 3rem;
   border-width: 0;
   width:100%;
-  border-top: 4px solid #4679ea;
+  border-top: 4px solid #2682ea;
 }
 .imagehr{
   margin-top: 0rem;

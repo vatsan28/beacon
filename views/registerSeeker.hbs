@@ -1,290 +1,309 @@
 <p>{{mesage}}</p>
 <div class="container">
     <div class="row">
-        <div class="row">
-            <img src="/images/logo_black.png" class="logoimage">
-            <a href="/logout">
-                <span style="float:right; margin-left: 10px;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i></span>
-            </a>
-        </div>
-        <h1>
-            Register Account
-        </h1>
-        <hr class="titlehr">
-        <hr>
+        <img src="/images/logo_black.png" class="logoimage">
+        <a href="/logout">
+            <span style="float:right; margin-left: 10px;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i></span>
+        </a>
+    </div>
         <h5>
-            <label style="text-align: center" for = "contactInfoRegistration">Contact Information</label>
+            Register as a service <select id="registerType">
+                <option value="Seeker">seeker</option>
+                <option value="Provider">provider</option>
+            </select>
         </h5>
-        <div class="twelve columns">
-            <form id="registerationForm_Contact" method="POST">
-                <div style="margin-left: 2%;" class = "twelve columns">
+    <hr class="titlehr">
+    <hr>
+    <div class="twelve columns" id="FullForm">
+        <h5>
+            <label style="text-align: center" for = "contactInfoRegistration">General Information</label>
+        </h5>
+        <form id="registerationForm_Contact" method="POST">
+           <div id="GeneralFormDiv">
+            <div class="row">
+                <div style="margin-left: 2%;" class = "five columns">
                     <h6>
                         <label for="Email">Email</label>
                     </h6>
-                    <input class="u-half-width" type="text" name="email" placeholder="Please enter your email." id="register_email">
-                    <div class="six columns" id="validator_email">
-                        Please fill in your email ID.
-                    </div>
-                    <br>
-                    <br>
+                    <input class="u-full-width" type="text" name="email" placeholder="Please enter your email." id="register_email" required>
+
                 </div>
-
-                <!--<div class="six columns">-->
-                <!--<h6>-->
-                <!--<label for = "username">Username</label>-->
-                <!--</h6>-->
-                <!--&lt;!&ndash;<input class="u-full-width" type="text" name="username" placeholder="Please create your username." id="register_username">&ndash;&gt;-->
-                <!--<br>-->
-                <!--<br>-->
-                <!--<br>-->
-                <!--<br>-->
-                <!--</div>-->
-
-                <div class="six columns">
+                <div class="five columns">
                     <h6>
                         <label for = "password">Password</label>
                     </h6>
-                    <input class="u-full-width" type="password" name="password" placeholder="Please enter your password." id="register_password">
-                    <br>
-                    <br>
+                    <input class="u-full-width" type="password" name="password" placeholder="Please enter your password." id="register_password" required>
                 </div>
+            </div>
+            <br>
 
-                <div class="six columns">
+            <div class="row">
+                <div class="five columns">
                     <h6>
                         <label for = "password">Re-enter password</label>
                     </h6>
-                    <input class="u-full-width" type="password" placeholder="Please enter your password again." id="register_re_password">
+                    <input class="u-full-width" type="password" placeholder="Please enter your password again." id="register_re_password" required>
                     <div class="form-group" id="validator_password">
                         Your passwords do not match.
                     </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
                 </div>
-
-                <div class="six columns">
-                    <h6>
-                        <label for = "company">Company Name</label>
-                    </h6>
-                    <input class="u-full-width" type="text" name = "company_name" placeholder="Please enter the company name." id="register_company">
-                    <div class="form-group" id="validator_company">
-                        Please fill in your company name.
-                    </div>
-                    <br>
-                    <br>
-                </div>
-
-                <div class="six columns">
-                    <h6>
-                        <label for = "Grainger_Account">Grainger Account</label>
-                    </h6>
-                    <input class="u-full-width" type="text" name="grainger_account" placeholder="Please enter the grainger account." id="register_grainger">
-                    <div class="form-group" id="validator_account">
-                        Please fill in your grainger account.
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                </div>
-
-                <div class="six columns">
+                <div class="five columns">
                     <h6>
                         <label for = "First_Name">First Name</label>
                     </h6>
-                    <input class="u-full-width" type="text" name="first_name" placeholder="Please enter the first name." id="register_firstname">
-                    <div class="form-group" id="validator_firstname">
-                        We would love to know your first name.
-                    </div>
-                    <br>
-                    <br>
+                    <input class="u-full-width" type="text" name="first_name" placeholder="Please enter the first name." id="register_firstname" required>
                 </div>
-                <div class="six columns">
+            </div>
+            <br>
+            <div class="row">
+                <div class="five columns">
                     <h6>
                         <label for = "Last_Name">Last Name</label>
                     </h6>
-                    <input class="u-full-width" type="text" name="last_name" placeholder="Please enter the last name." id="register_lastname">
-                    <div class="form-group" id="validator_lastname">
-                        We would love to know your last name.
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                </div>
-                <h5>
-                    <label style="text-align: center" for = "shippingInfo">Shipping Information</label>
-                </h5>
-                <div class="six columns">
-                    <h6>
-                        <label for="Attention">Attention</label>
-                    </h6>
-                    <input class="u-full-width" name="attention" type="text" placeholder="Please enter your ..." id="register_attention">
-                    <div class="six columns" id="validator_attention">
-                        Please enter some attention information.
-                    </div>
-                    <br>
-                    <br>
-                </div>
-                <div class="six columns">
-                    <h6>
-                        <label for = "text">Street1</label>
-                    </h6>
-                    <input class="u-full-width" name="street1" type="text" placeholder="Please enter your address - street 1." id="register_street1">
-                    <div class="six columns" id="validator_street1">
-                        We would love to know your street details!
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                </div>
+                    <input class="u-full-width" type="text" name="last_name" placeholder="Please enter the last name." id="register_lastname" required>
 
-                <div class="six columns">
-                    <h6>
-                        <label for = "text">Street2</label>
-                    </h6>
-                    <input class="u-full-width" type="text" name="street2" placeholder="Please enter your address - street 2 (optional)." id="register_street2">
-                    <br>
-                    <br>
                 </div>
-
-                <div class="six columns">
+                <div class="five columns">
+                    <h6>
+                        <label for = "text">Street</label>
+                    </h6>
+                    <input class="u-full-width" name="street1" type="text" placeholder="Please enter your address - street." id="register_street1" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="five columns">
                     <h6>
                         <label for = "city">City</label>
                     </h6>
-                    <input class="u-full-width" type="text" name="city" placeholder="Please enter the city." id="register_city">
-                    <div class="six columns" id="validator_city">
-                        We would love to know your city!
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
+                    <input class="u-full-width" type="text" name="city" placeholder="Please enter the city." id="register_city" required>
                 </div>
-
-                <div class="six columns">
+                <div class="five columns">
                     <h6>
                         <label for = "State">State</label>
                     </h6>
-                    <input class="u-full-width" type="text" name="state" placeholder="Please enter the state." id="register_state">
-                    <div class="six columns" id="validator_state">
-                        Please enter which state you belong to!
-                    </div>
-                    <br>
-                    <br>
+                    <input class="u-full-width" type="text" name="state" placeholder="Please enter the state." id="register_state" required>
                 </div>
-
-                <div class="six columns">
+            </div>
+            <br>
+            <div class="row">
+                <div class="five columns">
                     <h6>
                         <label for = "zipcode">Zipcode</label>
                     </h6>
-                    <input class="u-full-width" type="text" name="zipcode" placeholder="Please enter the zipcode." id="register_zipcode">
-                    <div class="six columns" id="validator_zipcode">
-                        Please enter your zipcode!
+                    <input class="u-full-width" type="text" name="zipcode" placeholder="Please enter the zipcode." id="register_zipcode" required>
+                </div>
+                <div class="five columns">
+                    <h6>
+                        <label for = "phoneno">Phone number</label>
+                    </h6>
+                    <input class="u-full-width" type="text" name="phoneno" placeholder="Please enter your phone number." id="register_phoneno" required>
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group" id="validator">
+            </div>
+            <div class="row">
+                <button id="Login_registerButton" type='button' class="button-primary" onclick="submitSeekerForm();">Register</button>
+            </div>
+            <div class="row" id="ProviderDetailsSection">
+                <button id="Provider_Next" type='button' class="button-primary" onclick="fetchProviderDetailsForm();">Help us find your interests.</button>
+            </div>
+           </div>
+            <div class="row" id="ProviderSpecificDiv">
+                <h5>
+                    <label style="text-align: center" for = "contactInfoRegistration">Service Provider Registration Form</label>
+                </h5>
+                    <div class="row">
+                            <h6>
+                                <label for = "providerInterest">Select your interests:</label>
+                            </h6>
+                            {{#each services}}
+                                <input type="checkbox" name=serviceOptions value={{this}}> <span>{{this}}</span><br>
+                            {{/each}}
                     </div>
                     <br>
+
+                    <div class="row">
+                        <h6>
+                        <label for = "OtherInterests">If you have other interests, tell us more about it. Help us help you discover!</label>
+                        </h6>
+                        <textarea style="border-radius: 10px;width: 503px;height: 113px;" id="OtherInterestsDesc" form="ProviderSpecificForm">
+
+                        </textarea>
+                    </div>
                     <br>
-                    <br>
-                    <br>
-                </div>
 
-                <div class="form-group" id="validator">
-                </div>
-                <button id="Login_registerButton" class="button-primary" type="submit">Register</button>
-                <br>
-                <br>
-                <br>
-                <br>
-            </form>
-        </div>
-        <hr>
+                    <div class="row" id="ExpertiseLevels">
+                        <h6>
+                            <label for = "InterestLevel">Help us understand your expertise in your interests!</label>
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <button id="registerButton" type='button' class="button-primary" onclick="submitProviderForm();">Register</button>
+                    </div>
+                    <div class="row" id="ProviderSectionValidator">
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>
 
+<script>
+    $(document).ready(function()
+    {
+        $('#ProviderSpecificDiv').hide();
+        $('#Login_registerButton,#validator_password').hide();
+        if ($('#registerType').val() == 'Seeker'){
+            $('#ProviderDetailsSection').hide();
+        }else if ($('#registerType').val() == 'Provider'){
+            $('#ProviderDetailsSection').show();
+        }
+    });
 
+    $('#registerType').change(function() {
+        if ($('#registerType').val() == 'Seeker'){
+            $('#ProviderDetailsSection').hide();
 
+            var inputCheck = true;
+            $("#registerationForm_Contact input").each(function(index, element){
 
-        <script>
-            $(document).ready(function()
-            {
-                $('#Login_registerButton,#validator_lastname,#validator_firstname,#validator_company,#validator_account,#validator_email,#validator_password,#validator_attention,#validator_street1,#validator_city,#validator_state,#validator_zipcode').hide();
-
+                if ($(element).val() == "")
+                    inputCheck = false;
             });
+            if (inputCheck){
+                $('#validator').show();
+                $('#validator').html('You are good to go.');
+                $('#validator').css('color','black');
+                $('#Login_registerButton').show();
+            }
+        }else if ($('#registerType').val() == 'Provider'){
+            $('#Login_registerButton').hide();
+            var inputCheck = true;
+            $("#registerationForm_Contact input").each(function(index, element){
 
-            // Checking for valid fields.
-            $('#register_email,#register_password,#register_re_password,#register_company,#register_grainger,#register_firstname,#register_lastname').on('change',function()
-            {
-                console.log("Changed");
-                if ($('#register_password').val().length != 0)
-                {
-                    if ($('#register_password').val() === $('#register_re_password').val())
-                    {
-                        if ($('#register_email').val().length != 0)
-                        {
-                            if ($('#register_company').val().length != 0)
-                            {
-                                if ($('#register_grainger').val().length != 0)
-                                {
-                                    if ($('#register_firstname').val().length != 0)
-                                    {
-                                        if ($('#register_lastname').val().length != 0)
-                                        {
-                                            console.log($('#register_password').val());
-                                            $('#validator').show();
-                                            $('#validator').html('You are good to go!.');
-                                            $('#validator').css('color','black');
-                                            $('#validator_lastname,#validator_firstname,#validator_company,#validator_account,#validator_email,#validator_password').hide();
-                                            $('#Login_registerButton').show();
-                                        }
-                                        else
-                                        {
-                                            $('#validator_lastname').show();
-                                            $('#validator').hide();
-                                            $('#Login_registerButton,#validator_firstname,#validator_company,#validator_account,#validator_email,#validator_password').hide();
-                                        }
-                                    }
-                                    else
-                                    {
-                                        $('#validator_firstname').show();
-                                        $('#validator').hide();
-                                        $('#Login_registerButton,#validator_lastname,#validator_company,#validator_account,#validator_email,#validator_password').hide();
-                                    }
-                                }
-                                else
-                                {
-                                    $('#validator_account').show();
-                                    $('#validator').hide();
-                                    $('#Login_registerButton,#validator_lastname,#validator_firstname,#validator_company,#validator_email,#validator_password').hide();
-                                }
-                            }
-                            else
-                            {
-                                $('#validator_company').show();
-                                $('#validator').hide();
-                                $('#Login_registerButton,#validator_lastname,#validator_firstname,#validator_account,#validator_email,#validator_password').hide();
-                            }
-                        }
-                        else
-                        {
-                            $('#validator_email').show();
-                            $('#validator').hide();
-                            $('#Login_registerButton,#validator_lastname,#validator_firstname,#validator_company,#validator_account,#validator_password').hide();
-                        }
-                    }
-                    else
-                    {
-                        console.log($('#register_password').val());
-                        console.log($('#register_re_password').val());
-                        $('#validator').hide();
-                        $('#validator_password').show();
-                        $('#Login_registerButton,#validator_lastname,#validator_firstname,#validator_company,#validator_account,#validator_email').hide();
-                    }
-                }
-                else
-                {
-                    $('#validator').html('Please enter your details');
-                    $('#validator').css('color', 'red');
-                    $('#Login_registerButton').hide();
-                }
+                if ($(element).val() == "")
+                    inputCheck = false;
             });
-        </script>
+            if (inputCheck){
+                $('#validator').show();
+                $('#validator').html('Your one step closer to start as a service provider.');
+                $('#validator').css('color','black');
+                $('#ProviderDetailsSection').show();
+            }
+
+        }
+    });
+
+    // Checking for valid fields.
+    $('#register_password,#register_re_password').on('change',function() {
+        console.log("Changed");
+        if ($('#register_password').val().length != 0) {
+            if ($('#register_password').val() === $('#register_re_password').val()) {
+                console.log($('#register_password').val());
+                $('#validator_password').hide();
+            }else{
+                $('#validator_password').show();
+            }
+        }
+    });
+
+    $("#registerationForm_Contact input").on("keyup change", function(){
+        var inputValidate = true;
+        $("#registerationForm_Contact input").each(function(index, element){
+
+            if ($(element).val() == "")
+                inputValidate = false;
+        });
+
+        if (inputValidate)
+        {
+            console.log("ALl set");
+            if ($('#registerType').val() == 'Provider'){
+                console.log($('#registerType').val());
+                $('#validator').show();
+                $('#validator').html('Your one step closer to start as a service provider.');
+                $('#validator').css('color', 'black');
+                $('#ProviderDetailsSection').show();
+            }else if ($('#registerType').val() == 'Seeker'){
+                $('#validator').show();
+                $('#validator').html('You are good to go!.');
+                $('#validator').css('color', 'black');
+                $('#Login_registerButton').show();
+            }
+        }else{
+            console.log(inputValidate);
+        }
+    });
+
+    function fetchProviderDetailsForm(){
+        console.log("Next step activated.");
+        $('#GeneralFormDiv').hide(750);
+        $('#ProviderSpecificDiv').show();
+
+    }
+
+    $('input[type=checkbox]').change(function(){
+        if($(this).is(':checked')){
+            var checkedValue=$(this).next("span").text();
+            console.log(checkedValue);
+            var tempHtml = "<div class='row' id="+checkedValue+"Expertise><h6><label for = "+checkedValue+"InterestLevel> What is you expertise level as a "+checkedValue+"?</label></h6><input type='radio' id="+checkedValue+"Beginner value='Beginner' name="+checkedValue+"Options required>Beginner <input type='radio' id=Inter value='Inter' name="+checkedValue+"Options>Intermediate <input type='radio' id="+checkedValue+"Expert value='Expert' name="+checkedValue+"Options>Expert </div><br>";
+            console.log(tempHtml);
+            $('#ExpertiseLevels').append(tempHtml);
+        }else{
+            console.log('Unchecked');
+            var uncheckedValue = $(this).next("span").text();
+            if (uncheckedValue.indexOf(' ') > -1){
+                console.log(uncheckedValue.split(" "));
+                uncheckedValue = uncheckedValue.split(" ")[0];
+                $('#'+uncheckedValue).remove();
+            }
+            console.log(uncheckedValue);
+            $('#'+uncheckedValue+'Expertise').remove();
+        }
+    });
+
+    function submitProviderForm(){
+        var checkedValues=[]
+        $("input:checkbox[name=serviceOptions]:checked").each(function(){
+            checkedValues.push($(this).next('span').text());
+        });
+
+        console.log(checkedValues);
+        var allChecked = true;
+        var stupid=[];
+        for (var i=0;i<checkedValues.length;i++){
+            var currentValue = checkedValues[i];
+            console.log(currentValue);
+            if (currentValue.indexOf(' ') > -1){
+                console.log(currentValue.split(" "));
+                currentValue  = currentValue.split(" ")[0];
+                if (!$("input[name="+currentValue+"]:checked").val()){
+                    allChecked = false;
+                    stupid.push(currentValue);
+                }
+            }else if (!$("input[name="+currentValue+"Options]:checked").val()){
+                allChecked = false;
+                stupid.push(currentValue);
+            }
+        }
+        if (allChecked){
+            console.log("All checked!");
+            $('#ProviderSectionValidator').hide();
+            document.getElementById("registerationForm_Contact").submit();
+        }else{
+            console.log(stupid);
+            $('#ProviderSectionValidator').show();
+            $('#ProviderSectionValidator').html('Please check if you have provided your expertise level for all the interests selected.');
+            $('#ProviderSectionValidator').css('color', 'black');
+        }
+    }
+
+    function submitSeekerForm(){
+        if ($('#registerType').val() == 'Seeker'){
+            document.getElementById("registerationForm_Contact").submit();
+        }
+
+    }
+</script>
