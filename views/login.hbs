@@ -3,9 +3,13 @@
         <div class="row">
             <img src="/images/logo_black.png" class="logoimage">
         </div>
-        <h1>
-            Login
-        </h1>
+        <h5>
+            Login as    <select id="logintype">
+                    <option value="Seeker">Seeker</option>
+                    <option value="Provider">Provider</option>
+                </select>
+
+        </h5>
         <hr class="titlehr">
         <p>{{message}}</p>
         <div class = "six columns">
@@ -16,6 +20,7 @@
                 <input class="u-full-width" name='email' type="text" placeholder="Please enter your email ID." id="login_email" />
                 <br>
                 <br>
+                <input name="loginType" type="hidden" id="loginType" value='Seeker'/>
                 <h5>
                     <label for="Password">Password</label>
                 </h5>
@@ -40,3 +45,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#logintype').change(function() {
+        console.log($(this).val());
+        $('#login_type').val($(this).val());
+        console.log($('#login_type').val());
+    });
+</script>
