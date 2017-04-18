@@ -37,7 +37,7 @@ function stringBuilder(fname, lname, description, img, i, tag) {
 }
 
 function UpdateProgressBars(recommend, total, count) {
-	console.log("#progressbar" + count)
+	console.log("#progressbar" + count);
 	$("#progressbar" + count).progressbar({
 		value: recommend / total * 100
 	});
@@ -45,27 +45,26 @@ function UpdateProgressBars(recommend, total, count) {
 }
 
 function inputChange(val) {
-	console.log(val);
-  $(".providerList").empty();
-	socketSeeker.emit('seekerQuery', {
-		searchTerm: val
-	});
+    console.log(val);
+    $(".providerList").empty();
+    socketSeeker.emit('seekerQuery', {
+        searchTerm: val
+    });
+}
 
 function createModalTrigger(i)
 {
-  
-  $("#myBtn"+i).click(function() {
-	$("#result"+i).dialog({
-		modal: true,
-		minWidth: 600,
-		buttons: {
-			RequestService: function() {        
-        sendRequest();
-			}
-		}
-	});
-});
-
+	$("#myBtn"+i).click(function() {
+        $("#result"+i).dialog({
+            modal: true,
+            minWidth: 600,
+            buttons: {
+                RequestService: function() {
+                    sendRequest();
+                }
+            }
+        });
+    });
 }
 function updateMaps(lat,long)
 {

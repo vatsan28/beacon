@@ -103,8 +103,13 @@ io.on('connection',function(socket){
     });
 
     socket.on('bookRequest',function(data){
-        console.log("Recieved new booking: ",data);
-        // io.sockets.emit('newBookingRequest',{bookingInfo:data.searchTerm});
+        console.log("Received new booking: ",data);
+        var data={};
+        data.reqName = 'Srivatsan';
+        data.providerName = 'Shalman';
+        data.amount = 20;
+        data.msg = 'Hope this works out for you! Thanks';
+        io.sockets.emit('newBookingRequest',{bookingInfo:data});
     });
     //On a dispensing item socket message, open the appropriate door.
     // socket.on("DispensingItem",function(data){
@@ -238,6 +243,20 @@ app.post('/addBooking',function(req,res){
         res.write("All ok.");
         res.end();
     });
+});
+
+app.post('/newBooking',function(req,res){
+    console.log(req.body);
+    var data={};
+    data.reqName = 'Srivatsan';
+    data.providerName = 'Shalman';
+    data.amount = 20;
+    data.msg = 'Hope this works out for you! Thanks';
+    io.sockets.emit('newBookingRequest',{bookingInfo:data});
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/x-www-form-urlencoded');
+    res.write("All ok.");
+    res.end();
 });
 app.post('/addItem',function(req,res,next){
     var user = 'jim';

@@ -96,13 +96,14 @@
     providerHome.on('newBookingRequest',function(bookingInfo){
         console.log(bookingInfo);
         var bookInfo = bookingInfo.bookingInfo;
-        if (userProviderSession.uppercase() == bookInfo.providerName.uppercase()){
+        if (userProviderSession == bookInfo.providerName){
             var reqName = bookInfo.reqName;
             var amount = bookInfo.amount;
             var msg = bookInfo.msg;
             $('#reqName').text(reqName);
             $('#amount').text(amount);
             $('#msg').text(msg);
+            openModal();
         }
 
     });
@@ -111,14 +112,17 @@
 </script>
 
 <script>
-  $( function() {
-    $( "#dialog-message" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-  } );
+    function openModal(){
+        $( function() {
+            $( "#dialog-message" ).dialog({
+                modal: true,
+                buttons: {
+                    Ok: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+        } );
+    }
+
   </script>
