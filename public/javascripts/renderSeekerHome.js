@@ -94,10 +94,11 @@ function popupModal(e)
         minWidth: 600,
         buttons: {
             RequestService: function() {
+                sendRequest();
 			$(this).dialog("close");
             }
         }
     });
-    sendRequest();
+
 
 }
