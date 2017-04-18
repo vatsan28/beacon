@@ -89,6 +89,8 @@ io.on('connection',function(socket){
                         tempObj['totalusers'] = Math.floor(Math.random() * 100) + 1;
                         tempObj['recommend'] = Math.floor(Math.random() * tempObj['totalusers']) + 1;
                         tempObj['tag'] = query.searchTerm;
+                        tempObj['lat']=users[i].lat;
+                        tempObj['long']=users[i].long;
                         console.log(tempObj);
                         queryresult.push(tempObj);
                     }

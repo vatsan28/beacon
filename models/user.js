@@ -16,5 +16,7 @@ module.exports = mongoose.model('User', new Schema({
     registerType: String,
     expertiseLevel: Object,
     otherInterests: String,
-    interests: Object
+    interests: Object,
+    lat:String,
+    long:String
 }));

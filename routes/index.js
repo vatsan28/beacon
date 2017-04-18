@@ -75,6 +75,8 @@ router.post('/register', function(req, res, next) {
     var zipcode = req.body.zipcode;
     var description = req.body.selfDesc;
     var registerType = 'seeker';
+    var lat = '41.8821804';
+    var long = '-87.64050429999998';
     var interests="";
     var otherInterests="";
     var expertiseLevel={};
@@ -97,8 +99,8 @@ router.post('/register', function(req, res, next) {
         }
     }
     description=description.trim();
-    console.log(email,username,password,firstName,lastName,street1,city,state,zipcode,description,registerType,expertiseLevel,otherInterests,interests);
-    userController.createUser(email,username,password,firstName,lastName,street1,city,state,zipcode,description,registerType,expertiseLevel,otherInterests,interests,function(result) {
+    console.log(email,username,password,firstName,lastName,street1,city,state,zipcode,description,registerType,expertiseLevel,otherInterests,interests,lat,long);
+    userController.createUser(email,username,password,firstName,lastName,street1,city,state,zipcode,description,registerType,expertiseLevel,otherInterests,interests,lat,long,function(result) {
         if(result == 'Success'){
             res.render('login',{message: 'Log in with your email address now.'});
         }else{

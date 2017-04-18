@@ -11,7 +11,7 @@ var isValidPassword = function(dbpassword, password){
     return bCrypt.compareSync(password, dbpassword);
 }
 
-exports.createUser = function (email,username,password,firstName,lastName,street1,city,state,zipcode,description,registerType,expertiseLevel,otherInterests,interests,cb) {
+exports.createUser = function (email,username,password,firstName,lastName,street1,city,state,zipcode,description,registerType,expertiseLevel,otherInterests,interests,lat,long,cb) {
   var newUser = new User();
   newUser.username = username;
   newUser.email = email;
@@ -27,6 +27,8 @@ exports.createUser = function (email,username,password,firstName,lastName,street
   newUser.expertiseLevel = expertiseLevel;
   newUser.otherInterests = otherInterests;
   newUser.interests = interests;
+  newUser.lat = lat;
+  newUser.long = long;
   newUser.save(function(err){
     if (err) {
       cb('Error');
