@@ -41,14 +41,4 @@ $(function() {
 
 
 
-$("#myBtn").click(function() {
-	$("#dialog-message").dialog({
-		modal: true,
-		minWidth: 600,
-		buttons: {
-			Book: function() {
-				$(this).dialog("close");
-			}
-		}
-	});
-});
+

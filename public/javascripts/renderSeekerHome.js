@@ -27,7 +27,7 @@ socketSeeker.on('seekerQueryResults', function(result) {
 });
 
 function stringBuilder(fname, lname, description, img, i, tag) {
-	title = ' <h3><p class="provider-name">' + fname + ' ' + lname + '<div id="progressbar' + i + '"><div id="progress-label'+i+'" class="progress-label">Recommended</div></div> </h3><div>'
+	title = '<div id="result'+i+'"> <h3><p class="provider-name">' + fname + ' ' + lname + '<div id="progressbar' + i + '"><div id="progress-label'+i+'" class="progress-label">Recommended</div></div> </h3><div>'
 	profile = '<figure class="snip0057 red"> <figcaption> <h2>' + fname + '<span>' + lname + '</span></h2><p>' + description + '</p> </figcaption>'
 	image = '<div class="image"><img src=' + img + ' alt="sample4"/></div>'
 	position = '<div class="position">' + tag + '</div>'
@@ -51,19 +51,46 @@ function inputChange(val) {
 		searchTerm: val
 	});
 
+function createModalTrigger(i)
+{
+  
+  $("#myBtn"+i).click(function() {
+	$("#result"+i).dialog({
+		modal: true,
+		minWidth: 600,
+		buttons: {
+			RequestService: function() {        
+        sendRequest();
+			}
+		}
+	});
+});
+
 }
-// function updateMaps(latlong)
-// {
-// }
+function updateMaps(lat,long)
+{
+  console.log(lat,long)
+}
 function iterateJSON(providerList) {
 	console.log(providerList.result);
   providerList = providerList.result;
 	for (i = 0; i < providerList.length; i++) {
     console.log(providerList[i]);
 		stringBuilder(providerList[i]["fname"], providerList[i]["lname"], providerList[i]["description"], providerList[i]["img"],i, providerList[i]["tag"]);
-			// updateMaps(providerList[i]["lat"],providerList[i]["long"])
+		updateMaps(providerList[i]["lat"],providerList[i]["long"])
 		UpdateProgressBars(providerList[i]["recommend"], providerList[i]["totalusers"], i);
+    createModalTrigger
 	}
  
  $('#accordion').accordion("refresh");     
+}
+
+
+function sendRequest()
+{
+  val= "Hello";
+
+  		socketSeeker.emit('bookRequest', {
+		searchTerm: val
+	});
 }
