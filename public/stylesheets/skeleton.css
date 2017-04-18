@@ -894,14 +894,14 @@ pre > code {
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 th{
-  padding: 12px 15px;
-  color: #33c3f0;
+  padding: 15px 15px;
+  color: #235b6d;
   text-align: center;
   border-bottom: 1px solid gray; 
   width: 10%;
 }
 td {
-  padding: 12px 15px;
+  padding: 15px 15px;
   color: #040404;
   text-align: center;
   border-bottom: 1px solid gray; 

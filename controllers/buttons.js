@@ -1,6 +1,6 @@
 var Button = require('../models/button');
-var Clicks = require('../models/clicks');
-var clickController = require('../controllers/clicks');
+var Bookings = require('../models/booking');
+var bookingController = require('../controllers/booking');
 exports.getButtons = function (username, cb) {
   Button.find({owner: username}).exec(function(err, docs) {
       cb(docs);

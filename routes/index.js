@@ -4,12 +4,13 @@ var authRouter = express.Router();
 // var userController = require('../controllers/users');
 var itemController = require('../controllers/items');
 var userController = require('../controllers/users');
+var bookingController = require('../controllers/booking');
 var middleware = require('./middleware');
 var Client = require('node-rest-client').Client;
 var user = 'jim';
 var services=['Web developer','Tutor','Errands','Photographer','Chef'];
 
-router.get(['/','/login'],function(req,res,next) {
+router.get(['/','/login','/logout'],function(req,res,next) {
           res.render("login");
   });
 
@@ -28,10 +29,10 @@ router.post('/authenticate', function(req, res, next) {
             req.session.user = token.customId;
             if ((token.loginType).toUpperCase() == 'Provider'.toUpperCase()){
               console.log(token.loginType);
-              res.redirect('providerHome',{firstName:token.firstName});
+              res.redirect('/providerHome/'+token.firstName);
             }else if ((token.loginType).toUpperCase() == 'Seeker'.toUpperCase()){
               console.log(token.loginType);
-              res.render('seekerHome',{firstName:token.firstName });
+              res.redirect('/seekerHome/'+token.firstName);
             }else if (token.loginType == 'invalid'){
                 res.render('login',{message:'Please check your login type.'});
             }
@@ -42,9 +43,25 @@ router.post('/authenticate', function(req, res, next) {
     });
 });
 
-router.get('/seekerHome',function(req,res,next) {
-          res.render("seekerHome");
+router.get('/seekerHome/:firstName',middleware.isAuthenticated,function(req,res,next) {
+    console.log(req.params.firstName);
+    res.render("seekerHome",{firstName: req.params.firstName});
   });
+router.get('/providerHome/:firstName',middleware.isAuthenticated,function(req,res,next) {
+    bookingController.getProviderBookings(req.params.firstName,function(result){
+        console.log(result);
+        if (result.status == 'success'){
+            res.render('providerHome',{firstName:req.params.firstName,bookings:result.results});
+        }else{
+            console.log('error');
+            res.render('login',{message: "Please try again."});
+        }
+    });
+
+});
+
+
+
 
 router.post('/register', function(req, res, next) {
     var username = req.body.email;

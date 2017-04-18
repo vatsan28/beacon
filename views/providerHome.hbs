@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="row" style="margin-top: 5%">
+        <div class="six columns" onload="setUserSession('{{firstName}}')">
+            <h3 >
+                Welcome <span id="userSessionId">{{firstName}}</span>!
+            </h3>
+        </div>
+        <div class="six columns">
+            <h3 style="margin-right: 0%">
+                <span id="unavailableStatus" >Status: <i id='unavailableStatusIcon' style="color: #7a6f77;" class="fa fa-circle" aria-hidden="true" onclick="toggleStatus('on');"> Unavailable </i></span>
+                <span id="availableStatus">Status: <i id='availableStatusIcon' style="color: #4b9f44" class="fa fa-circle" aria-hidden="true" onclick="toggleStatus('off');"> Available </i></span>
+            </h3>
+        </div>
+        <!--<a href="/logout">-->
+            <!--<span style="float:right; margin-left: 10px;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i></span>-->
+        <!--</a>-->
+    </div>
+    <div class="row">
+
+    </div>
+
+    <div class="row" style="margin-top: 2%">
+        {{#if bookings}}
+            <h3 style="margin-left: 5%">
+                Activity history
+            </h3>
+            <table id="bookings_table" style="margin-left: 5%;margin-right: 5%;border: 1px solid #235b6d;">
+                <thead>
+                <tr style="background-color: lightgray">
+                    <th>Request Id</th>
+                    <th>Request Time</th>
+                    <th>Requester</th>
+                    <th>Requested Service</th>
+                    <th>Amount</th>
+                    <!--<th>Accept</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                {{#each bookings}}
+                    <tr id="{{this.ReqId}}">
+                        <td class="td_desc">
+                            {{this.ReqId}}
+                        </td>
+                        <td>
+                            {{this.reqTime}}
+                        </td>
+                        <td class="td_desc">
+                            {{this.Requester}}
+                        </td>
+                        <td>
+                            {{this.ReqService}}
+                        </td>
+                        <td>
+                            {{this.Amount}}
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        {{else}}
+            <p> No booking data for {{firstName}} yet.</p>
+        {{/if}}
+    </div>
+</div>
+<script>
+    var providerHome = io.connect();
+    var userProviderSession;
+    $(document).ready(function(){
+        $('#unavailableStatusIcon,#unavailableStatus').hide();
+            userProviderSession = $('#userSessionId').html();
+            console.log(userProviderSession);
+    });
+
+    function toggleStatus(message){
+        if (message == 'on'){
+            $("#unavailableStatusIcon,#unavailableStatus").hide();
+            $("#availableStatusIcon,#availableStatus").show();
+        }else if (message == 'off'){
+            $("#availableStatusIcon,#availableStatus").hide();
+            $("#unavailableStatusIcon,#unavailableStatus").show();
+        }
+    }
+
+    providerHome.on('newBookingRequest',function(bookingInfo){
+
+    });
+
+
+</script>

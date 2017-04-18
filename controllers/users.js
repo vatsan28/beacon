@@ -1,5 +1,5 @@
 var User = require('../models/user');
-var Clicks = require('../models/clicks');
+var Bookings = require('../models/booking');
 var bCrypt = require('bcrypt-nodejs');
 var jwt = require('jsonwebtoken');
 

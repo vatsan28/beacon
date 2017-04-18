@@ -17,6 +17,7 @@ var http = require('http'); // Node module for Http requests. Needed as the app 
 var port = normalizePort(process.env.PORT || '80');
 var itemController = require('./controllers/items'); // The items controller.
 var userController = require('./controllers/users'); // The users controller.
+var bookingController = require('./controllers/booking');
 var util = require('util');
 var Particle = require('particle-api-js'); // Node module for the particle library.
 var open = require("open");
@@ -70,6 +71,9 @@ var user = "jim";
 io.on('connection',function(socket){
     socket.on('seekerQuery',function(query){
         console.log(query);
+        if (query.searchTerm == 'Web Developer'){
+            query.searchTerm = 'Web';
+        }
         userController.searchUserFromService(query.searchTerm,function(result){
             if (result.code == 0){
                 if (result.results){
@@ -96,110 +100,110 @@ io.on('connection',function(socket){
         });
     });
     //On a dispensing item socket message, open the appropriate door.
-    socket.on("DispensingItem",function(data){
-        console.log(data);
-        //Fetch the locker id depending on the item.
-        itemController.getLockerId(data.partNo,function(result){
-            if (result.code == 0){
-                if (result.lockerId.length != 0){
-                    var locker = result.lockerId;
-                    var lockerId = locker.substr(1,2);
-                    var deviceLocation = locker.substr(3,2);
-                    var doorType;
-                    console.log(deviceLocation);
-                    console.log(lockerId);
-                    if (lockerId == "01"){
-                        doorType = 'foam';
-                        io.to(socket.id).emit('DeviceLocation',{deviceLocation: deviceLocation,doorType:doorType});
-                    }else if (lockerId == "02"){
-                        doorType = 'hinges';
-                        io.to(socket.id).emit('DeviceLocation',{deviceLocation: deviceLocation,doorType:doorType});
-                    }
-
-                    var message = "on"+(lockerId-1);
-                    console.log(message);
-                    //Invoking the particle photon function to open the door.
-                    if (lockerId != "03"){
-                        var fnPr = particle.publishEvent({ name: 'doorSignal', data: message, auth: access_token });
-                        // var fnPr = particle.callFunction({ deviceId: deviceId_DoorController, name: 'led', argument: message, auth: access_token });
-                    }else {
-                        var fnPrLocker3  = particle.publishEvent({ name: 'doorSignal', data: message, auth: access_token });
-                        // var fnPrLocker3 = particle.callFunction({ deviceId: deviceId_DoorController, name: 'led', argument: message, auth: access_token });
-                    }
-                    if (lockerId != "03"){
-                        /*  -> If the door opening function is invoked properly, wait to listen to the door is open status from the door sensor and then change the message in the front end.
-                         -> If the door isn't opening once, then try 3 times before aborting the process.
-                         -> If the door opens, then for the 1st door(foam tools door),light up the LED for the correct item.
-                         -> lightUpLed() is the function to light up the correct item.
-                         */
-                        fnPr.then(
-                            function(response) {
-                                console.log('Function called successfully:', response);
-                                if (lockerId == "01"){
-                                    console.log("Trying to open foam door---------------------------------------");
-                                }
-                                else if (lockerId == "02"){
-                                    console.log("Trying to open hinges door---------------------------------------");
-                                }
-                            }, function(err) {
-                                console.log('An error occurred:', err);
-                                console.log("Could not open door");
-                                io.sockets.emit("DoorClosed");
-                            });
-                        // var tempI = 0;
-                        // // console.log("Purpose:"+data.purpose);
-                        // // lightUpLed(doorType,deviceLocation,data.purpose);
-                        // // while (tempI!=10){
-                        // //     setTimeout(function(){lightUpLed(doorType,deviceLocation,data.purpose);},500);
-                        // //     tempI++;
-                        // // }
-
-                    }else if (lockerId == "03"){
-                        /*
-                            If it is the gloves door, then just assume the user replaces or puts back the item successfully and closes the door in 3 seconds.
-                         */
-                        fnPrLocker3.then(function(response){
-                            console.log("Door opened",response);
-                            console.log("All done");
-                            if (data.purpose.toLowerCase() == "return"){
-                                itemController.workOrderItemReturn(data.partNo,function(res){
-                                    if (res.code == 0){
-                                        console.log("Success in updating work order item.");
-                                    }else{
-                                        console.log("Error in updating work order item update.");
-                                    }
-                                });
-                            }else if (data.purpose.toLowerCase() == "dispense") {
-                                itemController.workOrderItemUpdate(data.partNo,function(res){
-                                    if (res.code == 0){
-                                        console.log("Success in updating work order item.");
-                                    }else{
-                                        console.log("Error in updating work order item update.");
-                                    }
-                                });
-                            }
-
-                            setTimeout(function(){
-                                console.log("Door closing now!!!");
-                                io.sockets.emit("WorkOrderDoorCloseInReturn");
-                            },3500);
-                        },function(err){
-                            console.log('An error occurred:', err);
-                            console.log("Could not open work order door");
-                            io.sockets.emit("WorkOrderDoorCloseInReturn");
-                        });
-                    } else {
-                        console.log("Particle functions not working");
-                    }
-                }
-                else{
-                    console.log("Error with parsing locker for the item.");
-                }
-            }else{
-                console.log("Error with fetching locker for the item.");
-            }
-        });
-    });
+    // socket.on("DispensingItem",function(data){
+    //     console.log(data);
+    //     //Fetch the locker id depending on the item.
+    //     itemController.getLockerId(data.partNo,function(result){
+    //         if (result.code == 0){
+    //             if (result.lockerId.length != 0){
+    //                 var locker = result.lockerId;
+    //                 var lockerId = locker.substr(1,2);
+    //                 var deviceLocation = locker.substr(3,2);
+    //                 var doorType;
+    //                 console.log(deviceLocation);
+    //                 console.log(lockerId);
+    //                 if (lockerId == "01"){
+    //                     doorType = 'foam';
+    //                     io.to(socket.id).emit('DeviceLocation',{deviceLocation: deviceLocation,doorType:doorType});
+    //                 }else if (lockerId == "02"){
+    //                     doorType = 'hinges';
+    //                     io.to(socket.id).emit('DeviceLocation',{deviceLocation: deviceLocation,doorType:doorType});
+    //                 }
+    //
+    //                 var message = "on"+(lockerId-1);
+    //                 console.log(message);
+    //                 //Invoking the particle photon function to open the door.
+    //                 if (lockerId != "03"){
+    //                     var fnPr = particle.publishEvent({ name: 'doorSignal', data: message, auth: access_token });
+    //                     // var fnPr = particle.callFunction({ deviceId: deviceId_DoorController, name: 'led', argument: message, auth: access_token });
+    //                 }else {
+    //                     var fnPrLocker3  = particle.publishEvent({ name: 'doorSignal', data: message, auth: access_token });
+    //                     // var fnPrLocker3 = particle.callFunction({ deviceId: deviceId_DoorController, name: 'led', argument: message, auth: access_token });
+    //                 }
+    //                 if (lockerId != "03"){
+    //                     /*  -> If the door opening function is invoked properly, wait to listen to the door is open status from the door sensor and then change the message in the front end.
+    //                      -> If the door isn't opening once, then try 3 times before aborting the process.
+    //                      -> If the door opens, then for the 1st door(foam tools door),light up the LED for the correct item.
+    //                      -> lightUpLed() is the function to light up the correct item.
+    //                      */
+    //                     fnPr.then(
+    //                         function(response) {
+    //                             console.log('Function called successfully:', response);
+    //                             if (lockerId == "01"){
+    //                                 console.log("Trying to open foam door---------------------------------------");
+    //                             }
+    //                             else if (lockerId == "02"){
+    //                                 console.log("Trying to open hinges door---------------------------------------");
+    //                             }
+    //                         }, function(err) {
+    //                             console.log('An error occurred:', err);
+    //                             console.log("Could not open door");
+    //                             io.sockets.emit("DoorClosed");
+    //                         });
+    //                     // var tempI = 0;
+    //                     // // console.log("Purpose:"+data.purpose);
+    //                     // // lightUpLed(doorType,deviceLocation,data.purpose);
+    //                     // // while (tempI!=10){
+    //                     // //     setTimeout(function(){lightUpLed(doorType,deviceLocation,data.purpose);},500);
+    //                     // //     tempI++;
+    //                     // // }
+    //
+    //                 }else if (lockerId == "03"){
+    //                     /*
+    //                         If it is the gloves door, then just assume the user replaces or puts back the item successfully and closes the door in 3 seconds.
+    //                      */
+    //                     fnPrLocker3.then(function(response){
+    //                         console.log("Door opened",response);
+    //                         console.log("All done");
+    //                         if (data.purpose.toLowerCase() == "return"){
+    //                             itemController.workOrderItemReturn(data.partNo,function(res){
+    //                                 if (res.code == 0){
+    //                                     console.log("Success in updating work order item.");
+    //                                 }else{
+    //                                     console.log("Error in updating work order item update.");
+    //                                 }
+    //                             });
+    //                         }else if (data.purpose.toLowerCase() == "dispense") {
+    //                             itemController.workOrderItemUpdate(data.partNo,function(res){
+    //                                 if (res.code == 0){
+    //                                     console.log("Success in updating work order item.");
+    //                                 }else{
+    //                                     console.log("Error in updating work order item update.");
+    //                                 }
+    //                             });
+    //                         }
+    //
+    //                         setTimeout(function(){
+    //                             console.log("Door closing now!!!");
+    //                             io.sockets.emit("WorkOrderDoorCloseInReturn");
+    //                         },3500);
+    //                     },function(err){
+    //                         console.log('An error occurred:', err);
+    //                         console.log("Could not open work order door");
+    //                         io.sockets.emit("WorkOrderDoorCloseInReturn");
+    //                     });
+    //                 } else {
+    //                     console.log("Particle functions not working");
+    //                 }
+    //             }
+    //             else{
+    //                 console.log("Error with parsing locker for the item.");
+    //             }
+    //         }else{
+    //             console.log("Error with fetching locker for the item.");
+    //         }
+    //     });
+    // });
 });
 
 
@@ -211,6 +215,23 @@ io.on('connection',function(socket){
         4. partNo: part number of the item being added.
         5. description: A description of the item being added which will be displayed on the front end.
  */
+app.post('/addBooking',function(req,res){
+    console.log(req.body);
+    var ReqId = req.body.reqId;
+    var today = new Date();
+    var reqTime = today;
+    var requester = req.body.requester;
+    var reqService = req.body.reqService;
+    var amount = req.body.amount;
+    var provider = req.body.provider;
+    bookingController.createNewBooking(ReqId,reqTime,requester,reqService,amount,provider,function(result){
+        console.log(result);
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/x-www-form-urlencoded');
+        res.write("All ok.");
+        res.end();
+    });
+});
 app.post('/addItem',function(req,res,next){
     var user = 'jim';
     var message;
@@ -302,7 +323,6 @@ app.post('/addItem',function(req,res,next){
         res.end();
     }
 });
-
 
 /*
 Everything from here is default for setting the app.
