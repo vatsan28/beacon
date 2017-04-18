@@ -28,11 +28,14 @@ router.post('/authenticate', function(req, res, next) {
             req.session.user = token.customId;
             if ((token.loginType).toUpperCase() == 'Provider'.toUpperCase()){
               console.log(token.loginType);
-              res.redirect('/providerHome/'+token.customId);
+              res.redirect('providerHome',{firstName:token.firstName});
             }else if ((token.loginType).toUpperCase() == 'Seeker'.toUpperCase()){
               console.log(token.loginType);
-              res.redirect('/seekerHome/'+token.customId);
+              res.render('seekerHome',{firstName:token.firstName });
+            }else if (token.loginType == 'invalid'){
+                res.render('login',{message:'Please check your login type.'});
             }
+            console.log(token);
         } else {
             res.render('login', {message: 'Please check your login credentials.'});
         }
@@ -44,23 +47,48 @@ router.get('/seekerHome',function(req,res,next) {
   });
 
 router.post('/register', function(req, res, next) {
-    console.log(req.body);
-    // var username = req.body.username;
-    // var email = req.body.email;
-    // var password = req.body.password;
-    // var firstName = req.body.first_name;
-    // var lastName = req.body.last_name;
-    // var street1 = req.body.street1;
-    // var street2 = req.body.street2;
-    // var city = req.body.city;
-    // var state = req.body.state;
-    // var zipcode = req.body.zipcode;
-    // var loginType = req.body.type;
-    //
-    // userController.createUser(email, password, firstName, lastName, street1, street2, city, state, zipcode, loginType,function(result) {
-    //     res.render('login');
-    // });
-    res.render('login');
+    var username = req.body.email;
+    var email = req.body.email;
+    var password = req.body.password;
+    var firstName = req.body.first_name;
+    var lastName = req.body.last_name;
+    var street1 = req.body.street1;
+    var city = req.body.city;
+    var state = req.body.state;
+    var zipcode = req.body.zipcode;
+    var description = req.body.selfDesc;
+    var registerType = 'seeker';
+    var interests="";
+    var otherInterests="";
+    var expertiseLevel={};
+    if(req.body.serviceOptions){
+        if ((req.body.serviceOptions).length != 0) {
+            registerType = 'provider';
+            interests = req.body.serviceOptions;
+            if (interests.length > 0) {
+                for (var i=0;i<interests.length;i++) {
+                    if(interests[i].toUpperCase() == 'web'.toUpperCase()){
+                        expertiseLevel[interests[i]] = req.body[interests[i]];
+                    }else{
+                        expertiseLevel[interests[i]] = req.body[interests[i]+'Options'];
+                    }
+                }
+                otherInterests = req.body.OtherInterests;
+                otherInterests=otherInterests.trim();
+
+            }
+        }
+    }
+    description=description.trim();
+    console.log(email,username,password,firstName,lastName,street1,city,state,zipcode,description,registerType,expertiseLevel,otherInterests,interests);
+    userController.createUser(email,username,password,firstName,lastName,street1,city,state,zipcode,description,registerType,expertiseLevel,otherInterests,interests,function(result) {
+        if(result == 'Success'){
+            res.render('login',{message: 'Log in with your email address now.'});
+        }else{
+            res.render('login',{message: "Please try registering again. Some error on our side."});
+        }
+
+    });
 });
 
 router.get('/logout',function(req,res,next){

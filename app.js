@@ -67,7 +67,9 @@ app.use('/', routes);
 //Important variables to be used throughout the app.
 var user = "jim";
 io.on('connection',function(socket){
-
+    socket.on('seekerQuery',function(query){
+        console.log(query);
+    });
     //On a dispensing item socket message, open the appropriate door.
     socket.on("DispensingItem",function(data){
         console.log(data);
