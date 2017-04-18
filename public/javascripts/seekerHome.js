@@ -34,8 +34,15 @@ $( "#datepicker" ).datepicker( "setDate", "04/17/2017" );
       "Errands"
     ];
     $( "#tags" ).autocomplete({
-      source: availableTags
-    });
+      source: availableTags,
+      
+    select: function (e, ui) {
+
+       inputChange(ui.item.label);
+       
+    },
+
+     });
   } );
 
 //Accordion 
