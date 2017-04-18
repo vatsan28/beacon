@@ -101,6 +101,11 @@ io.on('connection',function(socket){
             }
         });
     });
+
+    socket.on('bookRequest',function(data){
+        console.log("Recieved new booking: ",data);
+        // io.sockets.emit('newBookingRequest',{bookingInfo:data.searchTerm});
+    });
     //On a dispensing item socket message, open the appropriate door.
     // socket.on("DispensingItem",function(data){
     //     console.log(data);
