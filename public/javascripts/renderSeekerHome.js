@@ -18,29 +18,31 @@ var socketSeeker = io.connect();
 socketSeeker.on('seekerQueryResults',function(result){
  iterateJSON(result)
 });
-function stringBuilder(fname,lname,description,img,i,progress,tag)
+function stringBuilder(fname,lname,description,img,i,tag)
 {
-  accordion = ' <h3><p class="provider-name">'+fname+' '+lname+'Recommended : <div id="progressbar'+i+'"><div id="progress-label1" class="progress-label">Recommended</div></div> </h3><div>'
+  title = ' <h3><p class="provider-name">'+fname+' '+lname+'Recommended : <div id="progressbar'+i+'"><div id="progress-label1" class="progress-label">Recommended</div></div> </h3><div>'
   profile = '<figure class="snip0057 red"> <figcaption> <h2>'+fname+'<span>'+lname+'</span></h2><p>'+description+'</p> </figcaption>'
    image =  '<div class="image"><img src='+img+' alt="sample4"/></div>'
    position =  '<div class="position">'+tag+'</div>'
-  end = '</figure> <button id="myBtn">Check Availability</button> </div>"'
+  end = '</figure> <button id="myBtn'+i+'">Check Availability</button> </div>"'
+
+  	
+  $( ".providerList" ).append( title+profile+image+position+end);
+
 }
 
-function UpdateProgressBars(progressVals,count)
+function UpdateProgressBars(recommend,total,count)
  {
  
-    val = 1
-    while(val<count)
-    {
-        console.log("#progressbar"+val)
-    $( "#progressbar"+val ).progressbar({
-      value:val*10
+    
+        console.log("#progressbar"+count)
+    $( "#progressbar"+count ).progressbar({
+      value:recommend/total*100
      
     });
-     $("#progress-label"+val).text( val+"/10" );
-    val++;
-    }
+     $("#progress-label"+count).text( count+"/124" );
+    
+    
   } 
 
 function inputChange(val)
@@ -51,13 +53,22 @@ function inputChange(val)
     iterateJSON();
 }
 
-function updateMaps(latlong)
+function updateMaps(lat,long)
 {
 
 }
 
 function iterateJSON(providerList)
 {
-    obj = JSON.parse()
+  console.log(providerList);
+
+    for (i=1;i<=providerList.lengthi++)
+    {
+      stringBuilder(providerList[i]["fname"],providerList[i]["lname"],providerList[i]["description"],providerList[i]["img"],i,,providerList[i]["tag"])
+      updateMaps(providerList[i]["lat"],providerList[i]["long"])
+      UpdateProgressBars(providerList[i]["recommend"],providerList[i]["totalusers"]i);
+    }
+
+    
 }
 
