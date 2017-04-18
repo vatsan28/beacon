@@ -14,7 +14,10 @@
  
 // });
 // //  var appView = new AppView();
-
+var socketSeeker = io.connect();
+socketSeeker.on('seekerQueryResults',function(result){
+ iterateJSON(result)
+});
 function stringBuilder(fname,lname,description,img,i,progress,tag)
 {
   accordion = ' <h3><p class="provider-name">'+fname+' '+lname+'Recommended : <div id="progressbar'+i+'"><div id="progress-label1" class="progress-label">Recommended</div></div> </h3><div>'
@@ -24,12 +27,11 @@ function stringBuilder(fname,lname,description,img,i,progress,tag)
   end = '</figure> <button id="myBtn">Check Availability</button> </div>"'
 }
 
-function UpdateProgressBars()
+function UpdateProgressBars(progressVals,count)
  {
-    progressVals=4
-    val=1;
-    console.log(progressVals)
-    while(val<progressVals)
+ 
+    val = 1
+    while(val<count)
     {
         console.log("#progressbar"+val)
     $( "#progressbar"+val ).progressbar({
@@ -43,6 +45,19 @@ function UpdateProgressBars()
 
 function inputChange(val)
 {
+    console.log(val);
     
+    socketSeeker.emit('seekerQuery',{searchTerm: val});    
+    iterateJSON();
+}
+
+function updateMaps(latlong)
+{
+
+}
+
+function iterateJSON(providerList)
+{
+    obj = JSON.parse()
 }
 
