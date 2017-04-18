@@ -11,20 +11,22 @@ var isValidPassword = function(dbpassword, password){
     return bCrypt.compareSync(password, dbpassword);
 }
 
-exports.createUser = function (email, password, firstName, lastName, street1, street2, city, state, zipcode, loginType,cb) {
+exports.createUser = function (email,username,password,firstName,lastName,street1,city,state,zipcode,description,registerType,expertiseLevel,otherInterests,interests,cb) {
   var newUser = new User();
-
-  // newUser.username = username;
+  newUser.username = username;
   newUser.email = email;
   newUser.password = createHash(password);
   newUser.firstName = firstName;
   newUser.lastName = lastName;
   newUser.street1 = street1;
-  newUser.street2 = street2;
   newUser.city = city;
   newUser.state = state;
   newUser.zipcode = zipcode;
-  newUser.loginType = loginType;
+  newUser.registerType= registerType;
+  newUser.description = description;
+  newUser.expertiseLevel = expertiseLevel;
+  newUser.otherInterests = otherInterests;
+  newUser.interests = interests;
   newUser.save(function(err){
     if (err) {
       cb('Error');
@@ -83,12 +85,17 @@ exports.loginUser = function (email, password, loginType,cb) {
 
         //Check for type
           if ((loginType).toUpperCase() == 'Provider'.toUpperCase()){
-              if((user.type).toUpperCase() == 'PROVIDER'){
+              if((user.registerType).toUpperCase() == 'PROVIDER'){
                   message.loginType = 'Provider';
+              }else{
+                message.loginType='invalid';
               }
           }else if ((loginType).toUpperCase() == 'Seeker'.toUpperCase()) {
-              if ((user.type).toUpperCase() in ['SEEKER','PROVIDER'] ){
+              if (((user.registerType).toUpperCase() == 'SEEKER') || ((user.registerType).toUpperCase() == 'PROVIDER')){
                   message.loginType = 'Seeker';
+              }else{
+                  message.loginType='invalid';
+                  console.log(user.registerType);
               }
           }
 
@@ -98,12 +105,27 @@ exports.loginUser = function (email, password, loginType,cb) {
         message.success = true;
         message.body = 'Success';
         message.token = token;
+        message.firstName = user.firstName;
         cb(message);
       }
     }
   });
 };
+exports.searchUserFromService=function(searchTerm,cb){
+  User.find({interests:searchTerm},function(err,user){
+    var result = {};
+    if (err){
+      console.log(err);
+      result.code = 1;
+    }else{
+      console.log(user);
+      result.results = user;
+      result.code = 0;
+    }
 
+    cb(result);
+  });
+};
 exports.getUserContact = function(userId,cb){
   User.findOne({_id: userId},function(err,user){
     var result = {};

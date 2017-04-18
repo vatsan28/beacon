@@ -102,6 +102,17 @@
             </div>
             <br>
 
+             <div class="row">
+                 <div class="six columns">
+                     <h6>
+                         <label for = "zipcode">Description</label>
+                     </h6>
+                     <textarea  style="border-radius: 10px;width: 503px;height: 113px;resize:none;" rows='1' columns='50' name="selfDesc" placeholder="Tell us a little bit about yourself." id="selfDesc" form="registerationForm_Contact" required>
+                     </textarea>
+                 </div>
+             </div>
+
+
             <div class="form-group" id="validator">
             </div>
             <div class="row">
@@ -129,8 +140,7 @@
                         <h6>
                         <label for = "OtherInterests">If you have other interests, tell us more about it. Help us help you discover!</label>
                         </h6>
-                        <textarea style="border-radius: 10px;width: 503px;height: 113px;" id="OtherInterestsDesc" form="ProviderSpecificForm">
-
+                        <textarea style="border-radius: 10px;width: 503px;height: 113px;resize:none;" id="OtherInterestsDesc" name="OtherInterests" form="registerationForm_Contact">
                         </textarea>
                     </div>
                     <br>
@@ -182,9 +192,10 @@
             $('#Login_registerButton').hide();
             var inputCheck = true;
             $("#registerationForm_Contact input").each(function(index, element){
-
-                if ($(element).val() == "")
-                    inputCheck = false;
+                if ($(element).attr('id') != 'OtherInterestsDesc') {
+                    if ($(element).val() == "")
+                        inputCheck = false;
+                }
             });
             if (inputCheck){
                 $('#validator').show();
@@ -212,9 +223,12 @@
     $("#registerationForm_Contact input").on("keyup change", function(){
         var inputValidate = true;
         $("#registerationForm_Contact input").each(function(index, element){
-
-            if ($(element).val() == "")
-                inputValidate = false;
+                if ($(element).attr('id') != 'OtherInterestsDesc'){
+                    if ($(element).val() == ""){
+                        console.log($(element).attr('id'));
+                        inputValidate = false;
+                    }
+                }
         });
 
         if (inputValidate)
@@ -248,7 +262,7 @@
         if($(this).is(':checked')){
             var checkedValue=$(this).next("span").text();
             console.log(checkedValue);
-            var tempHtml = "<div class='row' id="+checkedValue+"Expertise><h6><label for = "+checkedValue+"InterestLevel> What is you expertise level as a "+checkedValue+"?</label></h6><input type='radio' id="+checkedValue+"Beginner value='Beginner' name="+checkedValue+"Options required>Beginner <input type='radio' id=Inter value='Inter' name="+checkedValue+"Options>Intermediate <input type='radio' id="+checkedValue+"Expert value='Expert' name="+checkedValue+"Options>Expert </div><br>";
+            var tempHtml = "<div class='row' id="+checkedValue+"Expertise><h6><label for = "+checkedValue+"InterestLevel> What is your expertise level as a "+checkedValue+"?</label></h6><input type='radio' id="+checkedValue+"Beginner value='Beginner' name="+checkedValue+"Options required>Beginner <input type='radio' id=Inter value='Inter' name="+checkedValue+"Options>Intermediate <input type='radio' id="+checkedValue+"Expert value='Expert' name="+checkedValue+"Options>Expert </div><br>";
             console.log(tempHtml);
             $('#ExpertiseLevels').append(tempHtml);
         }else{

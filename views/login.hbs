@@ -18,7 +18,7 @@
                 <input class="u-full-width" name='email' type="text" placeholder="Please enter your email ID." id="login_email" />
                 <br>
                 <br>
-                <input name="loginType" type="hidden" id="loginType" value='Seeker'/>
+                <input name="loginType" type="hidden" id="loginTypeHidden" value='Seeker'/>
                 <h5>
                     <label for="Password">Password</label>
                 </h5>
@@ -47,7 +47,7 @@
 <script>
     $('#logintype').change(function() {
         console.log($(this).val());
-        $('#login_type').val($(this).val());
-        console.log($('#login_type').val());
+        $('#loginTypeHidden').val($(this).val());
+        console.log($('#loginTypeHidden').val());
     });
 </script>

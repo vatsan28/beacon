@@ -16,6 +16,7 @@ var debug = require('debug')('jwtokens:server');
 var http = require('http'); // Node module for Http requests. Needed as the app has socket communication between back end and front end.
 var port = normalizePort(process.env.PORT || '80');
 var itemController = require('./controllers/items'); // The items controller.
+var userController = require('./controllers/users'); // The users controller.
 var util = require('util');
 var Particle = require('particle-api-js'); // Node module for the particle library.
 var open = require("open");
@@ -67,7 +68,33 @@ app.use('/', routes);
 //Important variables to be used throughout the app.
 var user = "jim";
 io.on('connection',function(socket){
-
+    socket.on('seekerQuery',function(query){
+        console.log(query);
+        userController.searchUserFromService(query.searchTerm,function(result){
+            if (result.code == 0){
+                if (result.results){
+                    console.log(result.results);
+                    var users = result.results;
+                    var queryresult=[];
+                    for (var i=0;i<users.length;i++){
+                        var tempObj = {};
+                        tempObj['fname']=users[i].firstName;
+                        tempObj['lname']=users[i].lastName;
+                        tempObj['description']=users[i].description;
+                        tempObj['img'] = 'http://alummata.com/wp-content/uploads/2016/05/salman-khan.jpg';
+                        tempObj['totalusers'] = Math.floor(Math.random() * 100) + 1;
+                        tempObj['recommend'] = Math.floor(Math.random() * tempObj['totalusers']) + 1;
+                        tempObj['tag'] = query.searchTerm;
+                        console.log(tempObj);
+                        queryresult.push(tempObj);
+                    }
+                    socket.emit('seekerQueryResults',{result: queryresult});
+                }
+            }else{
+                console.log("Error in query fetch");
+            }
+        });
+    });
     //On a dispensing item socket message, open the appropriate door.
     socket.on("DispensingItem",function(data){
         console.log(data);

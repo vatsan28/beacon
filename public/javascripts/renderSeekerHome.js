@@ -16,7 +16,8 @@
 // //  var appView = new AppView();
 var socketSeeker = io.connect();
 socketSeeker.on('seekerQueryResults',function(result){
- iterateJSON(result)
+    console.log(result);
+ iterateJSON(result);
 });
 function stringBuilder(fname,lname,description,img,i,tag)
 {
@@ -53,22 +54,26 @@ function inputChange(val)
     iterateJSON();
 }
 
+
 function updateMaps(lat,long)
+{
+
+
+function updateMaps(latlong)
 {
 
 }
 
 function iterateJSON(providerList)
 {
+
   console.log(providerList);
 
     for (i=1;i<=providerList.lengthi++)
     {
       stringBuilder(providerList[i]["fname"],providerList[i]["lname"],providerList[i]["description"],providerList[i]["img"],i,,providerList[i]["tag"])
       updateMaps(providerList[i]["lat"],providerList[i]["long"])
-      UpdateProgressBars(providerList[i]["recommend"],providerList[i]["totalusers"]i);
+      UpdateProgressBars(providerList[i]["recommend"],providerList[i]["totalusers"],i);
     }
-
-    
 }
 
