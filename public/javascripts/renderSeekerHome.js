@@ -16,8 +16,7 @@
 // //  var appView = new AppView();
 var socketSeeker = io.connect();
 socketSeeker.on('seekerQueryResults',function(result){
-    console.log(result);
- iterateJSON(result);
+    iterateJSON(result);
 });
 function stringBuilder(fname,lname,description,img,i,tag)
 {
