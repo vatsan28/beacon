@@ -81,7 +81,7 @@ io.on('connection',function(socket){
                         tempObj['fname']=users[i].firstName;
                         tempObj['lname']=users[i].lastName;
                         tempObj['description']=users[i].description;
-                        tempObj['img'] = 'http://alummata.com/wp-content/uploads/2016/05/salman-khan.jpg';
+                        tempObj['img'] = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample4.jpg';
                         tempObj['totalusers'] = Math.floor(Math.random() * 100) + 1;
                         tempObj['recommend'] = Math.floor(Math.random() * tempObj['totalusers']) + 1;
                         tempObj['tag'] = query.searchTerm;
