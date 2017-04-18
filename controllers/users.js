@@ -111,7 +111,21 @@ exports.loginUser = function (email, password, loginType,cb) {
     }
   });
 };
+exports.searchUserFromService=function(searchTerm,cb){
+  User.find({interests:searchTerm},function(err,user){
+    var result = {};
+    if (err){
+      console.log(err);
+      result.code = 1;
+    }else{
+      console.log(user);
+      result.results = user;
+      result.code = 0;
+    }
 
+    cb(result);
+  });
+};
 exports.getUserContact = function(userId,cb){
   User.findOne({_id: userId},function(err,user){
     var result = {};

@@ -16,7 +16,8 @@
 // //  var appView = new AppView();
 var socketSeeker = io.connect();
 socketSeeker.on('seekerQueryResults',function(result){
- iterateJSON(result)
+    console.log(result);
+ iterateJSON(result);
 });
 function stringBuilder(fname,lname,description,img,i,progress,tag)
 {
@@ -52,12 +53,12 @@ function inputChange(val)
 }
 
 function updateMaps(latlong)
-{
-
+{;
+//;
 }
 
 function iterateJSON(providerList)
 {
-    obj = JSON.parse()
+    // obj = JSON.parse()
 }
 
