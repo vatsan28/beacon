@@ -62,6 +62,18 @@
         {{/if}}
     </div>
 </div>
+
+<div id="dialog-message" title="New Request" visible=false>
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+    You have recieved a new request from user <span id="uname"> </span>. The requestor is willing to pay <span id="amount"></span>
+  </p>
+  <p>
+   <span id="msg"> <span>
+  </p>
+</div>
+
+
 <script>
     var providerHome = io.connect();
     var userProviderSession;
@@ -87,3 +99,16 @@
 
 
 </script>
+
+<script>
+  $( function() {
+    $( "#dialog-message" ).dialog({
+      modal: true,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  } );
+  </script>

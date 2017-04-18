@@ -13,13 +13,21 @@
 //   }
 // });
 // //  var appView = new AppView();
+
+//Leaflet functions
+var map = L.map('mapid').setView([51.505, -0.09], 13);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+L.marker([51.5, -0.09]).addTo(map).bindPopup('A pretty CSS3 popup.<br> Easily customizable.').openPopup();
+
 var socketSeeker = io.connect();
 socketSeeker.on('seekerQueryResults', function(result) {
 	iterateJSON(result);
 });
 
 function stringBuilder(fname, lname, description, img, i, tag) {
-	title = ' <h3><p class="provider-name">' + fname + ' ' + lname + 'Recommended : <div id="progressbar' + i + '"><div id="progress-label1" class="progress-label">Recommended</div></div> </h3><div>'
+	title = ' <h3><p class="provider-name">' + fname + ' ' + lname + '<div id="progressbar' + i + '"><div id="progress-label'+i+'" class="progress-label">Recommended</div></div> </h3><div>'
 	profile = '<figure class="snip0057 red"> <figcaption> <h2>' + fname + '<span>' + lname + '</span></h2><p>' + description + '</p> </figcaption>'
 	image = '<div class="image"><img src=' + img + ' alt="sample4"/></div>'
 	position = '<div class="position">' + tag + '</div>'
@@ -33,7 +41,7 @@ function UpdateProgressBars(recommend, total, count) {
 	$("#progressbar" + count).progressbar({
 		value: recommend / total * 100
 	});
-	$("#progress-label" + count).text(count + "/124");
+	$("#progress-label"+count).text(recommend+ "/"+total+" recommends this provider");
 }
 
 function inputChange(val) {
