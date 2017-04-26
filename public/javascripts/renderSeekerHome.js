@@ -77,10 +77,15 @@ function iterateJSON(providerList) {
 function sendRequest()
 {
     val= "Hello";
+    if (sessionStorage.getItem('user').toUpperCase() == 'NONE'){
+        console.log('No user');
+        window.location.replace('/login');
+    }else{
+        socketSeeker.emit('bookRequest', {
+            searchTerm: val
+        });
+    }
 
-    socketSeeker.emit('bookRequest', {
-        searchTerm: val
-    });
 }
 
 function popupModal(e)
@@ -99,6 +104,4 @@ function popupModal(e)
             }
         }
     });
-
-
 }

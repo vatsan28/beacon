@@ -1,14 +1,10 @@
-
-
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-
-
 <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-
+<div style="visibility: hidden" id ='userSession' onload="setSeekerUserSession('{{firstName}}')">{{firstName}}</div>
 
 <div class="row">
     <div class="one columns"><h3>Search</h3></div>
-    <div class= "eleven columns"><h4><input id="tags" style="width:100%"></h4></input></div>
+    <div class= "eleven columns"><h4><input id="tags" style="width:100%"></h4></div>
 </div>
 
 <div class ="row">
@@ -50,7 +46,13 @@
 <style>
 
 </style>
+<script>
+    window.onload=function(){
+        var user = '{{firstName}}';
+        console.log(user);
+        sessionStorage.setItem('user',user);
+    };
+</script>
 
- 
 
 

@@ -10,9 +10,13 @@ var Client = require('node-rest-client').Client;
 var user = 'jim';
 var services=['Web developer','Tutor','Errands','Photographer','Chef'];
 
-router.get(['/','/login','/logout'],function(req,res,next) {
-          res.render("login");
+router.get(['/','/logout'],function(req,res,next) {
+          res.render("seekerHome",{firstName:"None"});
   });
+
+router.get(['/login'],function(req,res,next) {
+    res.render("login");
+});
 
 router.get('/register', function(req, res, next) {
     res.render('registerSeeker',{services:services});
@@ -29,10 +33,10 @@ router.post('/authenticate', function(req, res, next) {
             req.session.user = token.customId;
             if ((token.loginType).toUpperCase() == 'Provider'.toUpperCase()){
               console.log(token.loginType);
-              res.redirect('/providerHome/'+token.firstName);
+              res.redirect('/providerHome/'+token.firstName,{firstName: token.firstName});
             }else if ((token.loginType).toUpperCase() == 'Seeker'.toUpperCase()){
               console.log(token.loginType);
-              res.redirect('/seekerHome/'+token.firstName);
+              res.redirect('/seekerHome/'+token.firstName,{firstName: token.firstName});
             }else if (token.loginType == 'invalid'){
                 res.render('login',{message:'Please check your login type.'});
             }

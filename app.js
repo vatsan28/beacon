@@ -102,6 +102,14 @@ io.on('connection',function(socket){
         });
     });
 
+    // socket.on('directToLogin',function(message){
+    //     if (message.uppercase() == 'SEEKER'){
+    //
+    //     }else if (message.uppercase( == 'PROVIDER')){
+    //
+    //     }
+    // });
+
     socket.on('bookRequest',function(data){
         console.log("Received new booking: ",data);
         var data={};
