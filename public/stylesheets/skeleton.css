@@ -200,13 +200,13 @@ padding : 0 20px;
 }
 
 .headerlogo{
-  /*border-style: solid;*/
-  /*border-width: medium;*/
-  /*border-color: #D02034;*/
-  /*border-radius: 5px;*/
-  /*-webkit-box-shadow: 4px 14px 19px 0px rgba(163,160,163,0.15);*/
-  /*-moz-box-shadow: 4px 14px 19px 0px rgba(163,160,163,0.15);*/
-  /*box-shadow: 4px 14px 19px 0px rgba(163,160,163,0.15);*/
+  border-style: solid;
+  border-width: medium;
+  border-color: #D02034;
+  border-radius: 5px;
+  -webkit-box-shadow: 4px 14px 19px 0px rgba(163,160,163,0.15);
+  -moz-box-shadow: 4px 14px 19px 0px rgba(163,160,163,0.15);
+  box-shadow: 4px 14px 19px 0px rgba(163,160,163,0.15);
   background-color: white;
  }
 

@@ -11,6 +11,12 @@ var user = 'jim';
 var services=['Web developer','Tutor','Errands','Photographer','Chef'];
 
 router.get(['/'],function(req,res,next) {
+        res.render("splashScreen",{firstName:"None"});
+    });
+router.get(['/home'],function(req,res,next) {
+        res.render("index",{firstName:"None"});
+    })
+router.get(['/seekerHome'],function(req,res,next) {
           res.render("seekerHome",{firstName:"None"});
   });
 
