@@ -115,7 +115,8 @@ exports.loginUser = function (email, password, loginType,cb) {
 };
 
 exports.findUserFromEmail=function(email,cb){
-  User.findOne({'email':email},function (err,user) {
+  console.log('######################'+email);
+  User.findOne({email:email},function (err,user) {
       var result={};
       if (err){
         result.result = 'failure';
