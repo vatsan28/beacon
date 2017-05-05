@@ -113,6 +113,22 @@ exports.loginUser = function (email, password, loginType,cb) {
     }
   });
 };
+
+exports.findUserFromEmail=function(email,cb){
+  User.findOne({'email':email},function (err,user) {
+      var result={};
+      if (err){
+        result.result = 'failure';
+        console.log("Error in email fetch");
+          cb(result);
+      }else{
+        result.result='success';
+        result.name=user.firstName;
+          cb(result);
+      }
+
+  });
+};
 exports.searchUserFromService=function(searchTerm,cb){
   User.find({interests:searchTerm},function(err,user){
     var result = {};

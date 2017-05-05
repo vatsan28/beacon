@@ -29,8 +29,9 @@ socketSeeker.on('seekerQueryResults', function(result) {
 });
 
 // console.log(sessionStorage.getItem('loginBool'));
-sessionStorage.setItem('loginBool',true)
+sessionStorage.setItem('loginBool',true);
  console.log(sessionStorage.getItem('loginBool'));
+    console.log(sessionStorage.getItem('user'));
 if (sessionStorage.getItem('searchCategory'))
 {
 var searchItem = inputChange(sessionStorage.getItem('searchCategory'));

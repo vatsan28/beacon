@@ -112,12 +112,33 @@ io.on('connection',function(socket){
 
     socket.on('bookRequest',function(data){
         console.log("Received new booking: ",data);
-        var data={};
-        data.reqName = 'Srivatsan';
-        data.providerName = 'Shalman';
-        data.amount = 20;
         data.msg = 'Hope this works out for you! Thanks';
-        io.sockets.emit('newBookingRequest',{bookingInfo:data});
+        if (data.reqName){
+            userController.findUserFromEmail(data.reqName,function(result){
+                if (result.result == 'success'){
+                    data.name = result.name;
+                }else{
+                    data.name='';
+                }
+            });
+        }else{
+            data.name = '';
+        }
+        bookingController.createNewBooking(data.name,data.reqService,data.amount,data.provider,function(result){
+           if (result == 'Success'){
+               console.log('Successful booking');
+               io.sockets.emit('newBookingRequest',{bookingInfo:data});
+           }else{
+               console.log('Unsuccessful booking');
+           }
+        });
+
+        // var data={};
+        // data.reqName = 'Srivatsan';
+        // data.providerName = 'Shalman';
+        // data.amount = 20;
+
+
     });
     //On a dispensing item socket message, open the appropriate door.
     // socket.on("DispensingItem",function(data){
