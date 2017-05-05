@@ -113,26 +113,27 @@ io.on('connection',function(socket){
     socket.on('bookRequest',function(data){
         console.log("Received new booking: ",data.searchTerm);
         data.msg = 'Hope this works out for you! Thanks';
+        var name;
         if (data.searchTerm.reqName){
             userController.findUserFromEmail(data.searchTerm.reqName,function(result){
-                console.log(result);
                 if (result.result == 'success'){
-                    data.searchTerm.name = result.name;
+                    name= result.name;
+                    bookingController.createNewBooking(name,data.searchTerm.reqService,data.searchTerm.amount,data.searchTerm.provider,function(result){
+                        if (result == 'Success'){
+                            console.log('Successful booking');
+                            io.sockets.emit('newBookingRequest',{bookingInfo:data});
+                        }else{
+                            console.log('Unsuccessful booking');
+                        }
+                    });
                 }else{
-                    data.searchTerm.name='';
+                    name='';
                 }
             });
         }else{
-            data.searchTerm.name = '';
+            console.log("Error in fetching service name");
         }
-        bookingController.createNewBooking(data.searchTerm.name,data.searchTerm.reqService,data.searchTerm.amount,data.searchTerm.provider,function(result){
-           if (result == 'Success'){
-               console.log('Successful booking');
-               io.sockets.emit('newBookingRequest',{bookingInfo:data});
-           }else{
-               console.log('Unsuccessful booking');
-           }
-        });
+
 
         // var data={};
         // data.reqName = 'Srivatsan';
