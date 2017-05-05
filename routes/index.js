@@ -45,7 +45,7 @@ router.post('/authenticate', function(req, res, next) {
             req.session.user = token.customId;
             if ((token.loginType).toUpperCase() == 'Provider'.toUpperCase()){
               console.log(token.loginType);
-              res.redirect('/providerHome/'+token.firstName);
+              res.render('providerHome',{uName:token.firstName});
             }else if ((token.loginType).toUpperCase() == 'Seeker'.toUpperCase()){
               console.log(token.loginType);
               res.render('seekerHome',{uName:token.firstName});
@@ -63,7 +63,7 @@ router.post('/authenticate', function(req, res, next) {
 //     console.log(req.params.firstName);
 //     res.render("seekerHome",{firstName: req.params.firstName});
 //   });
-router.get('/providerHome/:firstName',middleware.isAuthenticated,function(req,res,next) {
+router.get('/providerHome',middleware.isAuthenticated,function(req,res,next) {
     bookingController.getProviderBookings(req.params.firstName,function(result){
         console.log(result);
         if (result.status == 'success'){

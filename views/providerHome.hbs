@@ -1,128 +1,241 @@
-<div class="container">
-    <div class="row" style="margin-top: 5%">
-        <div class="six columns" onload="setUserSession('{{firstName}}')">
-            <h3 >
-                Welcome <span id="userSessionId">{{firstName}}</span>!
-            </h3>
-        </div>
-        <div class="six columns">
-            <h3 style="margin-right: 0%">
-                <span id="unavailableStatus" >Status: <i id='unavailableStatusIcon' style="color: #7a6f77;" class="fa fa-circle" aria-hidden="true" onclick="toggleStatus('on');"> Unavailable </i></span>
-                <span id="availableStatus">Status: <i id='availableStatusIcon' style="color: #4b9f44" class="fa fa-circle" aria-hidden="true" onclick="toggleStatus('off');"> Available </i></span>
-            </h3>
-        </div>
-        <!--<a href="/logout">-->
-            <!--<span style="float:right; margin-left: 10px;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i></span>-->
-        <!--</a>-->
-    </div>
-    <div class="row">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 
+
+
+
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"><img width=150px src="assets/img/portfolio/splashscreen.png" alt=""></a>
+		  
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="single-post.html">SINGLE POST</a></li>
+                <li><a href="portfolio.html">PORTFOLIO</a></li>
+                <li><a href="single-project.html">SINGLE PROJECT</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
     </div>
 
-    <div class="row" style="margin-top: 2%">
-        {{#if bookings}}
-            <h3 style="margin-left: 5%">
-                Activity history
-            </h3>
-            <table id="bookings_table" style="margin-left: 5%;margin-right: 5%;border: 1px solid #235b6d;">
-                <thead>
-                <tr style="background-color: lightgray">
-                    <th>Request Id</th>
-                    <th>Request Time</th>
-                    <th>Requester</th>
-                    <th>Requested Service</th>
-                    <th>Amount</th>
-                    <!--<th>Accept</th>-->
-                </tr>
-                </thead>
-                <tbody>
-                {{#each bookings}}
-                    <tr id="{{this.ReqId}}">
-                        <td class="td_desc">
-                            {{this.ReqId}}
-                        </td>
-                        <td>
-                            {{this.reqTime}}
-                        </td>
-                        <td class="td_desc">
-                            {{this.Requester}}
-                        </td>
-                        <td>
-                            {{this.ReqService}}
-                        </td>
-                        <td>
-                            {{this.Amount}}
-                        </td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        {{else}}
-            <p> No booking data for {{firstName}} yet.</p>
-        {{/if}}
-    </div>
+	<!-- *****************************************************************************************************************
+	 HEADERWRAP
+	 ***************************************************************************************************************** -->
+	<div id="headerwrap">
+	    <div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+                   
+                    <div  id="mapid" style=" height: 40vh; overflow: hide; padding:2px"> </div>
+					
+
+					
+								
+				</div>
+				
+			</div><!-- /row -->
+	    </div> <!-- /container -->
+	</div><!-- /headerwrap -->
+
+	<!-- *****************************************************************************************************************
+	 SERVICE LOGOS
+	 ***************************************************************************************************************** -->
+	 <!--<div id="service">
+	 	<div class="container">
+ 			<div class="row centered">
+ 				<div class="col-md-4">
+ 					<i class="fa fa-heart-o"></i>
+ 					<h4>Handsomely Crafted</h4>
+ 					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+ 					<p><br/><a href="#" class="btn btn-theme">More Info</a></p>
+ 				</div>
+ 				<div class="col-md-4">
+ 					<i class="fa fa-flask"></i>
+ 					<h4>Retina Ready</h4>
+ 					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+ 					<p><br/><a href="#" class="btn btn-theme">More Info</a></p>
+ 				</div>
+ 				<div class="col-md-4">
+ 					<i class="fa fa-trophy"></i>
+ 					<h4>Quality Theme</h4>
+ 					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+ 					<p><br/><a href="#" class="btn btn-theme">More Info</a></p>
+ 				</div>		 				
+	 		</div>
+	 	</div> -->
+	 <!--</div> -->
+	 
+	<!-- *****************************************************************************************************************
+	 PORTFOLIO SECTION
+	 ***************************************************************************************************************** -->
+	 <div style="height:30vh">
+        <h3 id="searchTerm" >PENDING REQUESTS</h3>
+<div class="DocumentList">
+    <ul id="search-result" class="list-inline">
+        <li class="DocumentItem">
+           <div class="portfolio-item graphic-design">
+					<div class="he-wrap tpl6">
+					<img src="assets/img/portfolio/portfolio_01.jpg" style="height:150px; width:150px;">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h4 class="a1" data-animate="fadeInDown">Errand Runner</h4>
+                                <h4 class="a1" data-animate="fadeInDown">Asking Price</h4>
+                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_09.jpg" class="dmbutton a2" data-animate="fadeInUp">Accept<i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i>Reject</a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+        </li>
+      
+    </ul>
 </div>
 
-<div id="dialog-message" title="New Request" visible=false>
-  <p>
-    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
-    You have recieved a new request from user <span id="reqName"> </span>. The requestor is willing to pay <span id="amount"></span>
-  </p>
-  <p>
-   <span id="msg"> </span>
-  </p>
-</div>
+
+{{!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8 m"><img id="modal-image"src="assets/img/portfolio/alberto.png" alt="" style="height:250;width:250;"></div>
+                            <div class="col-sm-8"><b id="modal-fname">John</b> <b id="modal-lname"> Doe</b></div>
+                            <div class="col-md-8 purplebg m">
+                                <div>
+                                    <ul class="nav nav-tabs" role="tablist">
+                    
+                                        <li role="presentation" class="active">
+                                        <a href="#info" aria-controls="info"
+                                        role="tab" data-toggle="tab">Info</a></li>
+                    
+                                        <li role="presentation"><a href="#rating"
+                                        aria-controls="rating" role="tab"
+                                        data-toggle="tab">Ratings</a></li>
+
+                                        <li role="presentation"><a href="#price"
+                                        aria-controls="price" role="tab"
+                                        data-toggle="tab">Price</a></li>
+
+                                        <li role="presentation"><a href="#skill"
+                                        aria-controls="skill" role="tab"
+                                        data-toggle="tab">Skill</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="info">
+                                            <h3>Description</h3>
+                                            <p  id="modal-info">Lorem Ipsum</p>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane fade" id="rating">
+                                            <h3>Rating</h3>
+                                            <p  id="modal-rating">3.5 stars</p>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane fade" id="price">
+                                            <h3>Price</h3>
+                                            <p sid="modal-rate">
+                                            <label for="amount">Asking price:</label>
+                                            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                            </p>
+                                            <div id="slider-range-min"></div>
+                                            <br>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane fade" id="skill">
+                                            <h3>Skill</h3>
+                                            <p id="modal-skill">Photu</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        </div>
+
+                        <div>
+                            <button id="modal-book" onclick="modalBook()" class="btn btn-primary btn-lg btn-block">Book</button>
+                        </div>    
+                    </div>         
+                    </div>
+                </div>                   
+            </div>  
+        </div>--}}
+
+        {{!--<style>
+           .modal {
+                
+                margin:auto;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                z-index: 10040;
+              
+            }
+
+            .btn {
+
+            }
+        </style>                    --}}
 
 
-<script>
-    var providerHome = io.connect();
-    var userProviderSession;
-    $(document).ready(function(){
-        $('#unavailableStatusIcon,#unavailableStatus').hide();
-            userProviderSession = $('#userSessionId').html();
-            console.log(userProviderSession);
-    });
-
-    function toggleStatus(message){
-        if (message == 'on'){
-            $("#unavailableStatusIcon,#unavailableStatus").hide();
-            $("#availableStatusIcon,#availableStatus").show();
-        }else if (message == 'off'){
-            $("#availableStatusIcon,#availableStatus").hide();
-            $("#unavailableStatusIcon,#unavailableStatus").show();
-        }
-    }
-
-    providerHome.on('newBookingRequest',function(bookingInfo){
-        console.log(bookingInfo);
-        var bookInfo = bookingInfo.bookingInfo;
-        if (userProviderSession == bookInfo.providerName){
-            var reqName = bookInfo.reqName;
-            var amount = bookInfo.amount;
-            var msg = bookInfo.msg;
-            $('#reqName').text(reqName);
-            $('#amount').text(amount);
-            $('#msg').text(msg+'$.');
-            openModal();
-        }
-
-    });
+<!--Java Script -->
 
 
-</script>
+      
 
-<script>
-    function openModal(){
-        $( function() {
-            $( "#dialog-message" ).dialog({
-                modal: true,
-                buttons: {
-                    Ok: function() {
-                        $( this ).dialog( "close" );
-                    }
-                }
-            });
-        } );
-    }
 
-  </script>
+
+
+
+
+
+
+
+<style>
+    .DocumentList
+{
+    overflow-x:scroll;
+    overflow-y:hidden;
+    height:200px;
+    width:100%;
+    padding: 0 15px;
+}
+
+.DocumentItem
+{
+ 
+    padding:0;
+    height:150px;
+}
+
+.list-inline {
+  white-space:nowrap;
+}
+
+
+
+</style>
+
+
+
+<script src="/javascripts/renderProviderHome.js"></script>
+{{!--<script src="/javascripts/seekerHome.js"></script>--}}
