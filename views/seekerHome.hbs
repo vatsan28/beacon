@@ -111,12 +111,13 @@
 
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-8 m"><img src="assets/img/portfolio/alberto.png" alt=""></div>
-                            <div class="col-sm-8"><b>John Doe</b></div>
+                            <div class="col-md-8 m"><img id="modal-image"src="assets/img/portfolio/alberto.png" alt="" style="height:250;width:250;"></div>
+                            <div class="col-sm-8"><b id="modal-fname">John</b> <b id="modal-lname"> Doe</b></div>
                             <div class="col-md-8 purplebg m">
                                 <div>
                                     <ul class="nav nav-tabs" role="tablist">
@@ -140,23 +141,23 @@
 
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade in active" id="info">
-                                            <h3>Information</h3>
-                                            <p>Lorem Ipsum</p>
+                                            <h3>Description</h3>
+                                            <p  id="modal-info">Lorem Ipsum</p>
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane fade" id="rating">
                                             <h3>Rating</h3>
-                                            <p>3.5 stars</p>
+                                            <p  id="modal-rating">3.5 stars</p>
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane fade" id="price">
                                             <h3>Price</h3>
-                                            <p>$7/hour</p>
+                                            <p sid="modal-rate">$7/hour</p>
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane fade" id="skill">
                                             <h3>Skill</h3>
-                                            <p>Photu</p>
+                                            <p id="modal-skill">Photu</p>
                                         </div>
                                     </div>
 
@@ -164,7 +165,7 @@
                         </div>
 
                         <div>
-                            <button class="btn btn-success">Book</button>
+                            <button id="modal-book" onclick="modalBook()" class="btn btn-primary btn-lg btn-block">Book</button>
                         </div>    
                     </div>         
                     </div>
@@ -174,15 +175,14 @@
 
         <style>
            .modal {
-                position: absolute;
+                
                 margin:auto;
                 top: 0px;
                 right: 0px;
                 bottom: 0px;
                 left: 0px;
                 z-index: 10040;
-                overflow: auto;
-                overflow-y: auto;
+              
             }
 
             .btn {

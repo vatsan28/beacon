@@ -16,7 +16,8 @@
 
 //Leaflet functions
 
-divLists = []
+var divLists = [];
+var globalList ;
 var map = L.map('mapid').setView([51.505, -0.09], 13);
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -47,8 +48,8 @@ function stringBuilder(fname, lname, description, img, i, tag) {
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
                                 <h3 class="a1" data-animate="fadeInDown">`+fname+`</h3>
-                                <a class="infoModal" data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_09.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
-                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                                <a data-rel="prettyPhoto" onclick="modalClick(this)" data-value="`+i+`" class="dmbutton a2" data-animate="fadeInUp">View</a>
+                                
                         	</div><!-- he bg -->
 						</div><!-- he view -->		
 					</div><!-- he wrap -->
@@ -88,6 +89,7 @@ function updateMaps(lat,long,fname,lname)
 function iterateJSON(providerList) {
 
     providerList = providerList.result;
+    globalList = providerList;
     for (i = 0; i < providerList.length; i++) {
         console.log(providerList[i]);
         stringBuilder(providerList[i]["fname"], providerList[i]["lname"], providerList[i]["description"], providerList[i]["img"],i, providerList[i]["tag"]);
@@ -100,19 +102,17 @@ function iterateJSON(providerList) {
 }
 
 
-function sendRequest()
+function sendRequest(val)
 {
-    val= "Hello";
-    if (sessionStorage.getItem('user').toUpperCase() == 'NONE'){
-        console.log('No user');
-        window.location.replace('/login');
-    }else{
+ 
+   
+
         socketSeeker.emit('bookRequest', {
             searchTerm: val
         });
     }
 
-}
+
 
 // function popupModal(e)
 // {
@@ -132,7 +132,48 @@ function sendRequest()
 //     });
 // }
 
-$(".infoModal").click(function(){
-    console.log("Modal Works")
-             $("#myModal").modal();
-        })
+function modalClick(params)
+
+{
+    console.log(globalList)
+     console.log(globalList[$(params).data("value")]["fname"])
+    
+    $("#modal-fname").text(globalList[$(params).data("value")]["fname"]); 
+    $("#modal-lname").text(globalList[$(params).data("value")]["lname"]);
+    $('#modal-image').attr("src",globalList[$(params).data("value")]["img"]);
+    $('#modal-info').text(globalList[$(params).data("value")]["description"]);
+    $('#modal-rate').text(Math.floor((Math.random() * 35) + 15));
+    $('#modal-rating').text(Math.floor((Math.random() * 5) + 1))
+    $('#modal-skill').text(globalList[$(params).data("value")]["tag"])
+
+
+
+     $("#myModal").modal();
+}
+
+function modalBook()
+{
+    var reqName = sessionStorage.getItem('user');
+    var reqService = $("#searchTerm").text();
+    var provider = $("#modal-fname").text();
+    var amount = $("#modal-rate").text() ;
+
+    var myObj = { "reqName":reqName, "reqService":reqService, "provider":provider,"amount":amount };
+    console.log(myObj);
+
+    sendRequest(myObj);
+$('#modal-book').prop('disabled', true);
+ $("#modal-book").html('Sending Request. Please Wait <i class="fa fa-circle-o-notch fa-spin" style="font-size:24px"></i>');
+  $(document).ready(function(){
+
+            setTimeout(function(){
+               $("#modal-book").html('Done.. Redirecting');
+                setTimeout(function(){
+                 
+                 window.location.replace("/home");
+                },1000);
+                  
+            },3000);
+        });
+
+}

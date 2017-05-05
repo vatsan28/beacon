@@ -48,7 +48,7 @@ router.post('/authenticate', function(req, res, next) {
               res.redirect('/providerHome/'+token.firstName);
             }else if ((token.loginType).toUpperCase() == 'Seeker'.toUpperCase()){
               console.log(token.loginType);
-              res.redirect('/seekerHome',{uName:token.firstName});
+              res.render('seekerHome',{uName:token.firstName});
             }else if (token.loginType == 'invalid'){
                 res.render('login',{message:'Please check your login type.'});
             }
