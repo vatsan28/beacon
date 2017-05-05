@@ -28,6 +28,23 @@ exports.createNewBooking = function(requester,reqService,amount,provider,cb){
     });
 }
 
+exports.fetchBookingsByUserName = function(name,cb){
+  console.log("Request for "+name);
+  var result={};
+  bookings.find({provider:name,status:'live'},function(err,user){
+    if (err){
+        console.log(err);
+        result.result='failure';
+        cb(result);
+    }else{
+        result.result='success';
+        result.users=user;
+        console.log(result.users);
+        cb(result);
+    }
+  });
+};
+
 exports.getProviderBookings = function(fname,cb){
   var result={};
   console.log("Find bookings for "+fname);
@@ -42,6 +59,22 @@ exports.getProviderBookings = function(fname,cb){
       }
       cb(result);
   });
+}
+
+exports.updateRequest=function(reqId,status,cb){
+  console.log(reqId);
+  bookings.update(
+      {'ReqId':reqId},
+      {'$set':{
+     'status':status
+  }},function(err,k){
+        if (err){
+            console.log(err);
+            cb('failure');
+        }else{
+            cb('success');
+        }
+      });
 };
 
 exports.getClickInDateRange=function(userId,startDate,endDate,cb) {
