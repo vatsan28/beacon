@@ -7,16 +7,17 @@ var buttonController = require('../controllers/buttons');
 // var sendgrid  = require('sendgrid')('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');
 
 
-exports.createNewBooking = function(reqId,reqTime,requester,reqService,amount,provider,cb){
+exports.createNewBooking = function(requester,reqService,amount,provider,cb){
     console.log("Booking details passed:");
     console.log(reqId,reqTime,requester,reqService,amount,provider);
     var newBooking= new bookings;
-    newBooking.ReqId = reqId;
-    newBooking.reqTime = reqTime;
+    newBooking.ReqId = math.random();
+    // newBooking.reqTime = ;
     newBooking.Requester = requester;
     newBooking.ReqService = reqService;
     newBooking.Amount = amount;
     newBooking.provider = provider;
+    newBooking.status = 'live';
     console.log(newBooking);
     newBooking.save(function (err) {
         if (err){

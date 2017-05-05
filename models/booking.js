@@ -9,6 +9,7 @@ module.exports = mongoose.model('Booking', new Schema({
   Requester : String,
   ReqService: String,
   Amount: Number,
-  provider:String
+  provider:String,
+    status:String
 })
 );
