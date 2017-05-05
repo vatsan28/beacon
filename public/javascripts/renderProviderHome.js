@@ -5,6 +5,32 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+
+var socketProvider = io.connect();
+socketProvider.on('providerQueryResults', function(result) {
+    iterateJSON(result);
+});
+
+function pendingRequest()
+{
+   
+        $("#search-result").empty();
+        socketSeeker.emit('pendingRequests', {
+            searchTerm: sessionStorage.getItem('user')
+        });
+}
+
+function updateRequest(val)
+{
+ 
+   
+
+        socketSeeker.emit('updateRequest', {
+            searchTerm: val
+        });
+    }
+
+
 function stringBuilder(fname, lname, askingPrice, img, i) {
     title = ` <li class="DocumentItem">
            <div class="portfolio-item graphic-design">
@@ -14,8 +40,8 @@ function stringBuilder(fname, lname, askingPrice, img, i) {
 							<div class="bg a0" data-animate="fadeIn">
                                 <h3 class="a1" data-animate="fadeInDown">`+fname+`</h3>
                                 <h3 class="a1" data-animate="fadeInDown">`+askingPrice+`</h3>
-                                <a  onclick="bookingCase(this)" data-value="`+i+`" class="dmbutton a2" data-animate="fadeInUp">View</a>
-                                <a onclick="bookingCase(this)" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                                <a  onclick="bookingCase(this)"  data-value-yes = "yes" data-value="`+i+`" class="dmbutton a2" data-animate="fadeInUp">View</a>
+                                <a onclick="bookingCase(this)" data-value-yes = "no"class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
                                 
                         	</div><!-- he bg -->
 						</div><!-- he view -->		
@@ -49,3 +75,17 @@ function iterateJSON(providerList) {
 
     // $('#accordion').accordion("refresh");
 }
+
+
+function bookingCase(params)
+{
+   var ReqId = globalList[$(params).data("value")]["ReqId"];
+   var status =$(params).data("value-yes");
+
+   var myObj = { "ReqId":ReqId, "status":status }
+
+   updateRequest(myObj);
+    
+}
+
+pendingRequest();

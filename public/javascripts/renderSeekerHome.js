@@ -18,6 +18,7 @@
 
 var divLists = [];
 var globalList ;
+var mapMarkers = [];
 var map = L.map('mapid').setView([51.505, -0.09], 13);
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -45,10 +46,10 @@ function stringBuilder(fname, lname, description, img, i, tag) {
     title = ` <li class="DocumentItem">
            <div class="portfolio-item graphic-design">
 					<div class="he-wrap tpl6">
-					<img src="`+img+`" style="height:150px; width:150px;">
+					<img src="`+img+`" onclick="focusMap(this)" data-imgvalue="`+i+`"style="height:150px; width:150px;">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">`+fname+`</h3>
+                                <h3 class="a1"  onclick="focusMap(this)" data-imgvalue="`+i+`" data-animate="fadeInDown">`+fname+`</h3>
                                 <a data-rel="prettyPhoto" onclick="modalClick(this)" data-value="`+i+`" class="dmbutton a2" data-animate="fadeInUp">View</a>
                                 
                         	</div><!-- he bg -->
@@ -77,6 +78,12 @@ function inputChange(val) {
     $("#searchTerm").text(val);
     $("#search-result").empty();
     $(".providerList").empty();
+    if(mapMarkers !=null)
+    {
+        mapMarkers.forEach(function(marker){
+            map.removeLayer(marker);
+        })
+    }
     socketSeeker.emit('seekerQuery', {
         searchTerm: val
     });
@@ -85,7 +92,10 @@ function inputChange(val) {
 
 function updateMaps(lat,long,fname,lname)
 {
-    L.marker([lat, long]).addTo(map).bindPopup(fname+' '+lname).openPopup();
+    marker = new  L.marker([lat, long])
+    map.addLayer(marker);
+    marker.bindPopup(fname+' '+lname).openPopup();
+    mapMarkers.push(marker);
 }
 function iterateJSON(providerList) {
 
@@ -112,6 +122,14 @@ function sendRequest(val)
             searchTerm: val
         });
     }
+
+function focusMap(params)
+{
+         var latLngs = [ mapMarkers[$(params).data("data-imgvalue")].getLatLng() ];
+         var markerBounds = L.latLngBounds(latLngs);
+        map.fitBounds(markerBounds);
+    
+}
 
 
 
