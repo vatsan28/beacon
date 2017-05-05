@@ -9,9 +9,9 @@ var buttonController = require('../controllers/buttons');
 
 exports.createNewBooking = function(requester,reqService,amount,provider,cb){
     console.log("Booking details passed:");
-    console.log(reqId,reqTime,requester,reqService,amount,provider);
+    console.log(requester,reqService,amount,provider);
     var newBooking= new bookings;
-    newBooking.ReqId = math.random();
+    newBooking.ReqId = Math.random();
     // newBooking.reqTime = ;
     newBooking.Requester = requester;
     newBooking.ReqService = reqService;

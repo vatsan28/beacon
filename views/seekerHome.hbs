@@ -152,7 +152,12 @@
 
                                         <div role="tabpanel" class="tab-pane fade" id="price">
                                             <h3>Price</h3>
-                                            <p sid="modal-rate">$7/hour</p>
+                                            <p sid="modal-rate">
+                                            <label for="amount">Asking price:</label>
+                                            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                            </p>
+                                            <div id="slider-range-min"></div>
+                                            <br>
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane fade" id="skill">

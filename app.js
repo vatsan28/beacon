@@ -111,20 +111,21 @@ io.on('connection',function(socket){
     // });
 
     socket.on('bookRequest',function(data){
-        console.log("Received new booking: ",data);
+        console.log("Received new booking: ",data.searchTerm);
         data.msg = 'Hope this works out for you! Thanks';
-        if (data.reqName){
-            userController.findUserFromEmail(data.reqName,function(result){
+        if (data.searchTerm.reqName){
+            userController.findUserFromEmail(data.searchTerm.reqName,function(result){
+                console.log(result);
                 if (result.result == 'success'){
-                    data.name = result.name;
+                    data.searchTerm.name = result.name;
                 }else{
-                    data.name='';
+                    data.searchTerm.name='';
                 }
             });
         }else{
-            data.name = '';
+            data.searchTerm.name = '';
         }
-        bookingController.createNewBooking(data.name,data.reqService,data.amount,data.provider,function(result){
+        bookingController.createNewBooking(data.searchTerm.name,data.searchTerm.reqService,data.searchTerm.amount,data.searchTerm.provider,function(result){
            if (result == 'Success'){
                console.log('Successful booking');
                io.sockets.emit('newBookingRequest',{bookingInfo:data});

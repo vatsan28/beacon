@@ -93,6 +93,7 @@
     function setUserSession(){
         console.log($('#login_email').val());
         sessionStorage.setItem('user',$('#login_email').val());
+        console.log( sessionStorage.getItem('user'));
     }
 
 

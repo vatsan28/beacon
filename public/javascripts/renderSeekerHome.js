@@ -143,7 +143,8 @@ function modalClick(params)
     $("#modal-lname").text(globalList[$(params).data("value")]["lname"]);
     $('#modal-image').attr("src",globalList[$(params).data("value")]["img"]);
     $('#modal-info').text(globalList[$(params).data("value")]["description"]);
-    $('#modal-rate').text(Math.floor((Math.random() * 35) + 15));
+    // $('#modal-rate').text(Math.floor((Math.random() * 35) + 15));
+    setSlider(Math.floor((Math.random() * 35) + 15),Math.floor((Math.random() * 35) + 50))
     $('#modal-rating').text(Math.floor((Math.random() * 5) + 1))
     $('#modal-skill').text(globalList[$(params).data("value")]["tag"])
 
@@ -155,9 +156,10 @@ function modalClick(params)
 function modalBook()
 {
     var reqName = sessionStorage.getItem('user');
+    console.log(reqName);
     var reqService = $("#searchTerm").text();
     var provider = $("#modal-fname").text();
-    var amount = $("#modal-rate").text() ;
+    var amount = $( "#amount" ).val() ;
 
     var myObj = { "reqName":reqName, "reqService":reqService, "provider":provider,"amount":amount };
     console.log(myObj);
@@ -177,4 +179,20 @@ $('#modal-book').prop('disabled', true);
             },3000);
         });
 
+}
+
+function setSlider(mini,maxi)
+{
+    $( function() {
+    $( "#slider-range-min" ).slider({
+      range: "min",
+      value: 37,
+      min: mini,
+      max: maxi,
+      slide: function( event, ui ) {
+        $( "#amount" ).val( "$" + ui.value );
+      }
+    });
+    $( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
+  } );
 }
