@@ -28,8 +28,16 @@ socketSeeker.on('seekerQueryResults', function(result) {
     iterateJSON(result);
 });
 
+// console.log(sessionStorage.getItem('loginBool'));
+sessionStorage.setItem('loginBool',true)
+ console.log(sessionStorage.getItem('loginBool'));
+if (sessionStorage.getItem('searchCategory'))
+{
 var searchItem = inputChange(sessionStorage.getItem('searchCategory'));
 $("#tags").attr("placeholder", searchItem).val("").focus().blur();
+}
+else
+ window.location.replace("/home");
 
 function stringBuilder(fname, lname, description, img, i, tag) {
     title = ` <li class="DocumentItem">
@@ -39,7 +47,7 @@ function stringBuilder(fname, lname, description, img, i, tag) {
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
                                 <h3 class="a1" data-animate="fadeInDown">`+fname+`</h3>
-                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_09.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a class="infoModal" data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_09.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
                                 <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
                         	</div><!-- he bg -->
 						</div><!-- he view -->		
@@ -123,3 +131,8 @@ function sendRequest()
 //         }
 //     });
 // }
+
+$(".infoModal").click(function(){
+    console.log("Modal Works")
+             $("#myModal").modal();
+        })

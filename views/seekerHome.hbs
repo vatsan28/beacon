@@ -91,7 +91,7 @@
         <h3 id="searchTerm" >TRENDING SEARCHES</h3>
 <div class="DocumentList">
     <ul id="search-result" class="list-inline">
-        <li class="DocumentItem">
+        {{!--<li class="DocumentItem">
            <div class="portfolio-item graphic-design">
 					<div class="he-wrap tpl6">
 					<img src="assets/img/portfolio/portfolio_01.jpg" style="height:150px; width:150px;">
@@ -104,68 +104,95 @@
 						</div><!-- he view -->		
 					</div><!-- he wrap -->
 				</div><!-- end col-12 -->
-        </li>
-        <li class="DocumentItem">
-            <div class="portfolio-item web-design">
-                    <div class="he-wrap tpl6">
-					<img src="assets/img/portfolio/portfolio_011.jpg" alt="" style="height:150px; width:150px;">
-						<div class="he-view">
-							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">Tutor</h3>
-                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_02.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
-                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
-                        	</div><!-- he bg -->
-						</div><!-- he view -->		
-					</div><!-- he wrap -->
-				</div><!-- end col-12 -->
-        
-        </li>
-     
-        <li class="DocumentItem">
-            <div class="portfolio-item web-design">
-                    <div class="he-wrap tpl6">
-					<img src="assets/img/portfolio/portfolio_03.jpg" alt="" style="height:150px; width:150px;">
-						<div class="he-view">
-							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">Tutor</h3>
-                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_02.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
-                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
-                        	</div><!-- he bg -->
-						</div><!-- he view -->		
-					</div><!-- he wrap -->
-				</div><!-- end col-12 -->
-        </li>
-        <li class="DocumentItem">
-             <div class="portfolio-item web-design">
-                    <div class="he-wrap tpl6">
-					<img src="assets/img/portfolio/portfolio_02.jpg" alt="" style="height:150px; width:150px;">
-						<div class="he-view">
-							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">Tutor</h3>
-                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_02.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
-                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
-                        	</div><!-- he bg -->
-						</div><!-- he view -->		
-					</div><!-- he wrap -->
-                </div><!-- end col-12 -->
-        </li>
-        <li class="DocumentItem">
-             <div class="portfolio-item web-design">
-                    <div class="he-wrap tpl6">
-					<img src="assets/img/portfolio/portfolio_04.jpg" alt="" style="height:150px; width:150px;">
-						<div class="he-view">
-							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">Tutor</h3>
-                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_02.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
-                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
-                        	</div><!-- he bg -->
-						</div><!-- he view -->		
-					</div><!-- he wrap -->
-				</div><!-- end col-12 -->
-        </li>
-       
+        </li>--}}
+      
     </ul>
 </div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8 m"><img src="assets/img/portfolio/alberto.png" alt=""></div>
+                            <div class="col-sm-8"><b>John Doe</b></div>
+                            <div class="col-md-8 purplebg m">
+                                <div>
+                                    <ul class="nav nav-tabs" role="tablist">
+                    
+                                        <li role="presentation" class="active">
+                                        <a href="#info" aria-controls="info"
+                                        role="tab" data-toggle="tab">Info</a></li>
+                    
+                                        <li role="presentation"><a href="#rating"
+                                        aria-controls="rating" role="tab"
+                                        data-toggle="tab">Ratings</a></li>
+
+                                        <li role="presentation"><a href="#price"
+                                        aria-controls="price" role="tab"
+                                        data-toggle="tab">Price</a></li>
+
+                                        <li role="presentation"><a href="#skill"
+                                        aria-controls="skill" role="tab"
+                                        data-toggle="tab">Skill</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="info">
+                                            <h3>Information</h3>
+                                            <p>Lorem Ipsum</p>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane fade" id="rating">
+                                            <h3>Rating</h3>
+                                            <p>3.5 stars</p>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane fade" id="price">
+                                            <h3>Price</h3>
+                                            <p>$7/hour</p>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane fade" id="skill">
+                                            <h3>Skill</h3>
+                                            <p>Photu</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-success">Book</button>
+                        </div>    
+                    </div>         
+                    </div>
+                </div>                   
+            </div>  
+        </div>
+
+        <style>
+           .modal {
+                position: absolute;
+                margin:auto;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                z-index: 10040;
+                overflow: auto;
+                overflow-y: auto;
+            }
+
+            .btn {
+
+            }
+        </style>                    
+
+
+<!--Java Script -->
+
 
       
 
@@ -175,8 +202,7 @@
 
 
 
-<script src="/javascripts/renderSeekerHome.js"></script>
-<script src="/javascripts/seekerHome.js"></script>
+
 
 <style>
     .DocumentList
@@ -205,4 +231,6 @@
 
 
 
+<script src="/javascripts/renderSeekerHome.js"></script>
+<script src="/javascripts/seekerHome.js"></script>
 
