@@ -1,9 +1,35 @@
 <style>
     body {
-        background-color: black;
+        background-color: rgb(8,55,94) ;
+
     }
+    img {
+        position:absolute;
+    top:0;
+    bottom:0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    }
+    .animate-bottom {
+ 
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
 </style>
-    <img src="/images/splashscreen.gif" class="welcomelogo" style="display: block; margin: 0 auto;">
+    <img src="/images/splashscreen.png" class ="animate-bottom">
 
     <script>
         $(document).ready(function(){

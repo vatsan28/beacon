@@ -26,7 +26,13 @@ router.get(['/login','/logout'],function(req,res,next) {
 
 router.get('/register', function(req, res, next) {
     res.render('registerSeeker',{services:services});
-});
+}); 
+
+// router.get('/seekerHome/:searchCategory',function(req,res,next){
+//     console.log(req.params.searchCategory);
+//     res.render('seekerHome',{searchCategory:req.params.searchCategory});
+//     console.log("Hi");
+// });
 
 router.post('/authenticate', function(req, res, next) {
     console.log(req.body);
@@ -53,10 +59,10 @@ router.post('/authenticate', function(req, res, next) {
     });
 });
 
-router.get('/seekerHome/:firstName',middleware.isAuthenticated,function(req,res,next) {
-    console.log(req.params.firstName);
-    res.render("seekerHome",{firstName: req.params.firstName});
-  });
+// router.get('/seekerHome',middleware.isAuthenticated,function(req,res,next) {
+//     console.log(req.params.firstName);
+//     res.render("seekerHome",{firstName: req.params.firstName});
+//   });
 router.get('/providerHome/:firstName',middleware.isAuthenticated,function(req,res,next) {
     bookingController.getProviderBookings(req.params.firstName,function(result){
         console.log(result);

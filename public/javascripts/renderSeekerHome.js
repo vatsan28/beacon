@@ -15,6 +15,7 @@
 // //  var appView = new AppView();
 
 //Leaflet functions
+
 divLists = []
 var map = L.map('mapid').setView([51.505, -0.09], 13);
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -27,27 +28,44 @@ socketSeeker.on('seekerQueryResults', function(result) {
     iterateJSON(result);
 });
 
+var searchItem = inputChange(sessionStorage.getItem('searchCategory'));
+$("#tags").attr("placeholder", searchItem).val("").focus().blur();
+
 function stringBuilder(fname, lname, description, img, i, tag) {
-    title = '<h3><p class="provider-name">' + fname + ' ' + lname + '<div id="progressbar' + i + '"><div id="progress-label'+i+'" class="progress-label">Recommended</div></div> </h3><div>'
-    profile = '<figure class="snip0057 red"> <figcaption> <h2>' + fname + '<span>' + lname + '</span></h2><p>' + description + '</p> </figcaption>'
-    image = '<div class="image"><img src=' + img + ' alt="sample4"/></div>'
-    position = '<div class="position">' + tag + '</div>'
-    end = '</figure> <button id="myBtn' + i + '" value='+i+' onclick= "popupModal(this.value)">Check Availability</button> </div>"'
+    title = ` <li class="DocumentItem">
+           <div class="portfolio-item graphic-design">
+					<div class="he-wrap tpl6">
+					<img src="`+img+`" style="height:150px; width:150px;">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">`+fname+`</h3>
+                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_09.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+        </li>`
+    // profile = '<figure class="snip0057 red"> <figcaption> <h2>' + fname + '<span>' + lname + '</span></h2><p>' + description + '</p> </figcaption>'
+    // image = '<div class="image"><img src=' + img + ' alt="sample4"/></div>'
+    // position = '<div class="position">' + tag + '</div>'
+    // end = '</figure> <button id="myBtn' + i + '" value='+i+' onclick= "popupModal(this.value)">Check Availability</button> </div>"'
     console.log("Reached here")
-    $(".providerList").append(title + profile + image + position + end);
-    divLists.push(title + profile + image + position + end);
+    $("#search-result").append(title);
+    divLists.push(title);
 }
 
-function UpdateProgressBars(recommend, total, count) {
-    console.log("#progressbar" + count)
-    $("#progressbar" + count).progressbar({
-        value: recommend / total * 100
-    });
-    $("#progress-label"+count).text(recommend+ "/"+total+" recommends this provider");
-}
+// function UpdateProgressBars(recommend, total, count) {
+//     console.log("#progressbar" + count)
+//     $("#progressbar" + count).progressbar({
+//         value: recommend / total * 100
+//     });
+//     $("#progress-label"+count).text(recommend+ "/"+total+" recommends this provider");
+// }
 
 function inputChange(val) {
-    console.log(val);
+    $("#searchTerm").text(val);
+    $("#search-result").empty();
     $(".providerList").empty();
     socketSeeker.emit('seekerQuery', {
         searchTerm: val
@@ -66,11 +84,11 @@ function iterateJSON(providerList) {
         console.log(providerList[i]);
         stringBuilder(providerList[i]["fname"], providerList[i]["lname"], providerList[i]["description"], providerList[i]["img"],i, providerList[i]["tag"]);
         updateMaps(providerList[i]["lat"],providerList[i]["long"],providerList[i]["fname"], providerList[i]["lname"])
-        UpdateProgressBars(providerList[i]["recommend"], providerList[i]["totalusers"], i);
+        // UpdateProgressBars(providerList[i]["recommend"], providerList[i]["totalusers"], i);
 
     }
 
-    $('#accordion').accordion("refresh");
+    // $('#accordion').accordion("refresh");
 }
 
 
@@ -88,20 +106,20 @@ function sendRequest()
 
 }
 
-function popupModal(e)
-{
-    $("#dialog-message").empty();
+// function popupModal(e)
+// {
+//     $("#dialog-message").empty();
 
-    $("#dialog-message").append(divLists[e]);
+//     $("#dialog-message").append(divLists[e]);
 
-    $("#dialog-message").dialog({
-        modal: true,
-        minWidth: 600,
-        buttons: {
-            RequestService: function() {
-                sendRequest();
-			$(this).dialog("close");
-            }
-        }
-    });
-}
+//     $("#dialog-message").dialog({
+//         modal: true,
+//         minWidth: 600,
+//         buttons: {
+//             RequestService: function() {
+//                 sendRequest();
+// 			$(this).dialog("close");
+//             }
+//         }
+//     });
+// }

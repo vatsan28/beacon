@@ -1,99 +1,208 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-<div style="visibility: hidden" id ='userSession' onload="setSeekerUserSession('{{firstName}}')">{{firstName}}</div>
-<img src="/images/splashscreen.png" class="logoimage" style="display: block; margin: 0 auto;">
-<div class="row">
-    <div class="one columns"><h3>Search</h3></div>
-    <div class= "eleven columns"><h4><input id="tags" style="width:100%"></h4></div>
+
+
+
+
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"><img width=150px src="assets/img/portfolio/splashscreen.png" alt=""></a>
+		  
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="single-post.html">SINGLE POST</a></li>
+                <li><a href="portfolio.html">PORTFOLIO</a></li>
+                <li><a href="single-project.html">SINGLE PROJECT</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	<!-- *****************************************************************************************************************
+	 HEADERWRAP
+	 ***************************************************************************************************************** -->
+	<div id="headerwrap">
+	    <div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+                    <input id="tags"class="form-control" style="width:100%;" placeholder="Search for a Service"> <br>
+                    <div  id="mapid" style=" height: 40vh; overflow: hide; padding:2px"> </div>
+					
+
+					
+								
+				</div>
+				
+			</div><!-- /row -->
+	    </div> <!-- /container -->
+	</div><!-- /headerwrap -->
+
+	<!-- *****************************************************************************************************************
+	 SERVICE LOGOS
+	 ***************************************************************************************************************** -->
+	 <!--<div id="service">
+	 	<div class="container">
+ 			<div class="row centered">
+ 				<div class="col-md-4">
+ 					<i class="fa fa-heart-o"></i>
+ 					<h4>Handsomely Crafted</h4>
+ 					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+ 					<p><br/><a href="#" class="btn btn-theme">More Info</a></p>
+ 				</div>
+ 				<div class="col-md-4">
+ 					<i class="fa fa-flask"></i>
+ 					<h4>Retina Ready</h4>
+ 					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+ 					<p><br/><a href="#" class="btn btn-theme">More Info</a></p>
+ 				</div>
+ 				<div class="col-md-4">
+ 					<i class="fa fa-trophy"></i>
+ 					<h4>Quality Theme</h4>
+ 					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+ 					<p><br/><a href="#" class="btn btn-theme">More Info</a></p>
+ 				</div>		 				
+	 		</div>
+	 	</div> -->
+	 <!--</div> -->
+	 
+	<!-- *****************************************************************************************************************
+	 PORTFOLIO SECTION
+	 ***************************************************************************************************************** -->
+	 <div style="height:30vh">
+        <h3 id="searchTerm" >TRENDING SEARCHES</h3>
+<div class="DocumentList">
+    <ul id="search-result" class="list-inline">
+        <li class="DocumentItem">
+           <div class="portfolio-item graphic-design">
+					<div class="he-wrap tpl6">
+					<img src="assets/img/portfolio/portfolio_01.jpg" style="height:150px; width:150px;">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">Errand Runner</h3>
+                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_09.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+        </li>
+        <li class="DocumentItem">
+            <div class="portfolio-item web-design">
+                    <div class="he-wrap tpl6">
+					<img src="assets/img/portfolio/portfolio_011.jpg" alt="" style="height:150px; width:150px;">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">Tutor</h3>
+                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_02.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+        
+        </li>
+     
+        <li class="DocumentItem">
+            <div class="portfolio-item web-design">
+                    <div class="he-wrap tpl6">
+					<img src="assets/img/portfolio/portfolio_03.jpg" alt="" style="height:150px; width:150px;">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">Tutor</h3>
+                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_02.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+        </li>
+        <li class="DocumentItem">
+             <div class="portfolio-item web-design">
+                    <div class="he-wrap tpl6">
+					<img src="assets/img/portfolio/portfolio_02.jpg" alt="" style="height:150px; width:150px;">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">Tutor</h3>
+                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_02.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+                </div><!-- end col-12 -->
+        </li>
+        <li class="DocumentItem">
+             <div class="portfolio-item web-design">
+                    <div class="he-wrap tpl6">
+					<img src="assets/img/portfolio/portfolio_04.jpg" alt="" style="height:150px; width:150px;">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">Tutor</h3>
+                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_02.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+        </li>
+       
+    </ul>
 </div>
 
-<div class ="row">
-    <div  id="mapid" style=" height: 50vh; overflow: hide;"> </div>
-</div>
-<div class ="row" style="height: 50vh; width: 40em; overflow-x: auto; display:table;" >
-   
-
-        {{!--<div class="providerList" id="accordion">--}}
-            {{!--<div class="providerList" >--}}
-
-                        <div class="card">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample4.jpg" alt="Avatar" style="width:100%">
-            <div class="container">
-                <h4><b>John Doe</b></h4> 
-                <p>Architect & Engineer</p> 
-            </div>
-            </div>
-                        <div class="card">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample4.jpg" alt="Avatar" style="width:100%">
-            <div class="container">
-                <h4><b>John Doe</b></h4> 
-                <p>Architect & Engineer</p> 
-            </div>
-            </div>
-
-            {{!--<div class="providerList" id="accordion">--}}
-
-            
-            <!--<h3><p class="provider-name"> :Victoria Pena </p> Recommended : <div id="progressbar1"><div id="progress-label1" class="progress-label">Recommended</div></div> </h3>
-            <div>
-              <figure class="snip0057 red">
-              <figcaption>
-                <h2>Victoria <span>Pena</span></h2>
-                <p>A voice crackles in Calvin's radio: "Enemy fighters at two o'clock!" "Roger. What should I do until then?"</p>
-                <div class="icons"><a href="#"><i class="ion-ios-home"></i></a><a href="#"><i class="ion-ios-email"></i></a><a href="#"><i class="ion-ios-telephone"></i></a></div>
-              </figcaption>
-              <div class="image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample4.jpg" alt="sample4"/></div>
-              <div class="position">Illustrator</div>
-            </figure>
-            <button id="myBtn">Open Modal</button>
-            </div>  -->
-        {{!--</div>--}}
+      
 
 
-    {{!--</div>--}}
-
-</div>
 
 
-<div id="dialog-message" title="Book Provider" style="width:60%" >
 
-</div>
 
 
 <script src="/javascripts/renderSeekerHome.js"></script>
 <script src="/javascripts/seekerHome.js"></script>
 
-<link rel='stylesheet' href='/stylesheets/seekerHome.css' />
 <style>
+    .DocumentList
+{
+    overflow-x:scroll;
+    overflow-y:hidden;
+    height:200px;
+    width:100%;
+    padding: 0 15px;
+}
+
+.DocumentItem
+{
+ 
+    padding:0;
+    height:150px;
+}
+
+.list-inline {
+  white-space:nowrap;
+}
+
+
 
 </style>
-<script>
-    window.onload=function(){
-        var user = '{{firstName}}';
-        console.log(user);
-        sessionStorage.setItem('user',user);
-    };
-</script>
-<style>
-    .card {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    
-    display:table-cell;
-}
 
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-/* Add some padding inside the card container */
-.container {
-    padding: 2px 16px;
-    
-}
-</style>
 
 
 
