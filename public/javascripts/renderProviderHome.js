@@ -15,7 +15,7 @@ function pendingRequest()
 {
    
         $("#search-result").empty();
-        socketSeeker.emit('pendingRequests', {
+        socketProvider.emit('pendingRequests', {
             searchTerm: sessionStorage.getItem('user')
         });
 }
@@ -25,7 +25,7 @@ function updateRequest(val)
  
    
 
-        socketSeeker.emit('updateRequest', {
+        socketProvider.emit('updateRequest', {
             searchTerm: val
         });
     }
@@ -38,10 +38,10 @@ function stringBuilder(fname, lname, askingPrice, img, i) {
 					<img src="`+img+`" style="height:150px; width:150px;">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">`+fname+`</h3>
-                                <h3 class="a1" data-animate="fadeInDown">`+askingPrice+`</h3>
-                                <a  onclick="bookingCase(this)"  data-value-yes = "yes" data-value="`+i+`" class="dmbutton a2" data-animate="fadeInUp">View</a>
-                                <a onclick="bookingCase(this)" data-value-yes = "no"class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                                <h3 class="a1" data-animate="fadeInDown">`+fname+askingPrice+`</h3>
+                                
+                                <a  onclick="bookingCase(this)"  data-value-yes = "yes" data-value="`+i+`" class="dmbutton a2" data-animate="fadeInUp">Ok</a>
+                                <a onclick="bookingCase(this)" data-value-yes = "no"class="dmbutton a2" data-animate="fadeInUp">X</a>
                                 
                         	</div><!-- he bg -->
 						</div><!-- he view -->		
@@ -83,8 +83,9 @@ function bookingCase(params)
    var status =$(params).data("value-yes");
 
    var myObj = { "ReqId":ReqId, "status":status }
-
+    console.log($(params).data("value"));
    updateRequest(myObj);
+    pendingRequest();
     
 }
 

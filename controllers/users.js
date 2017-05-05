@@ -144,29 +144,17 @@ exports.searchUserFromService=function(searchTerm,cb){
     cb(result);
   });
 };
-exports.getUserContact = function(userId,cb){
-  User.findOne({_id: userId},function(err,user){
+
+exports.getUserInfo= function(name,cb){
+  User.findOne({firstName: name},function(err,user){
     var result = {};
     if (err) {
       console.log(err);
-      result.firstName = "";
-      result.lastName = "";
-      result.street1 = "";
-      result.street2 = "";
-      result.city = "";
-      result.state = "";
-      result.zipcode = "";
-      result.code = 0;
+      result.result='failure';
       cb(result);
+    }else{
+        result.user = user;
+        cb(result);
     }
-    result.firstName = user.firstName;
-    result.lastName = user.lastName;
-    result.street1 = user.street1;
-    result.street2 = user.street2;
-    result.city = user.city;
-    result.state = user.state;
-    result.zipcode = user.zipcode;
-    result.code = 1;
-    cb(result);
   });
-}
+};

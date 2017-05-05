@@ -133,15 +133,74 @@ io.on('connection',function(socket){
         }else{
             console.log("Error in fetching service name");
         }
-
-
-        // var data={};
-        // data.reqName = 'Srivatsan';
-        // data.providerName = 'Shalman';
-        // data.amount = 20;
-
-
     });
+
+    socket.on('pendingRequests',function(data){
+        console.log("Received new pending requests: ",data.searchTerm);
+        var name;
+        if (data.searchTerm){
+            userController.findUserFromEmail(data.searchTerm,function(result) {
+                if (result.result == 'success') {
+                    name = result.name;
+                    bookingController.fetchBookingsByUserName(name, function (result) {
+                        if (result.result == 'success') {
+                            console.log('Fetched requests');
+                            // console.log(result.users);
+                            var users = result.users;
+                            var pendingResults = [];
+                            for (var i = 0; i < users.length; i++) {
+                                // console.log("------"+users[i]);
+                                var amount=users[i].Amount;
+                                var reqId=users[i].ReqId;
+                                userController.getUserInfo(users[i].Requester, function (result) {
+                                    // console.log(result);
+                                    if (result.result != 'failure') {
+                                        var tempObj = {};
+                                        tempObj['fname'] = result.user.firstName;
+                                        tempObj['lname'] = result.user.lastName;
+                                        tempObj['img'] = '/images/' + result.user.firstName.toLowerCase() + '.jpg';
+                                        tempObj['lat'] = result.user.lat;
+                                        tempObj['long'] = result.user.long;
+                                        tempObj['askingPrice'] = amount;
+                                        tempObj['ReqId']=reqId;
+                                        pendingResults.push(tempObj);
+                                    } else {
+                                        console.log("Error fetching user info");
+                                    }
+                                    // console.log(pendingResults);
+                                    if (pendingResults.length == (i)){
+                                        console.log("All fetched: " + pendingResults);
+                                        io.sockets.emit('providerQueryResults', {result: pendingResults});
+                                    }
+
+                                });
+                            }
+
+
+
+                        } else {
+                            // console.log(result);
+                            console.log('Unsuccessful fetch');
+                        }
+                    });
+                } else {
+                    name = '';
+                }
+            });
+        }
+    });
+
+    socket.on('updateRequest',function(data){
+        console.log("Update request for "+data.searchTerm.ReqId);
+        console.log("Update request for "+data.searchTerm.status);
+        bookingController.updateRequest(data.searchTerm.ReqId,data.searchTerm.status,function(result){
+            if (result=='success'){
+                console.log('Update done');
+            }else if (result == 'failure'){
+                console.log('Update not done');
+            }
+        });
+    })
     //On a dispensing item socket message, open the appropriate door.
     // socket.on("DispensingItem",function(data){
     //     console.log(data);
