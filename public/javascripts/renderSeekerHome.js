@@ -56,6 +56,7 @@ function stringBuilder(fname, lname, description, img, i, tag) {
 						</div><!-- he view -->		
 					</div><!-- he wrap -->
 				</div><!-- end col-12 -->
+                <h4>`+fname+`</h4>
         </li>`
     // profile = '<figure class="snip0057 red"> <figcaption> <h2>' + fname + '<span>' + lname + '</span></h2><p>' + description + '</p> </figcaption>'
     // image = '<div class="image"><img src=' + img + ' alt="sample4"/></div>'
@@ -99,6 +100,7 @@ function updateMaps(lat,long,fname,lname)
 }
 function iterateJSON(providerList) {
 
+    $("#tags").blur();
     providerList = providerList.result;
     globalList = providerList;
     for (i = 0; i < providerList.length; i++) {
@@ -125,9 +127,10 @@ function sendRequest(val)
 
 function focusMap(params)
 {
-         var latLngs = [ mapMarkers[$(params).data("data-imgvalue")].getLatLng() ];
+         var latLngs = [ mapMarkers[$(params).data("imgvalue")].getLatLng() ];
          var markerBounds = L.latLngBounds(latLngs);
         map.fitBounds(markerBounds);
+        mapMarkers[$(params).data("imgvalue")].bindPopup(globalList[$(params).data("imgvalue")]["description"]).openPopup();
     
 }
 
