@@ -18,9 +18,9 @@ exports.createNewBooking = function(requester,reqService,amount,provider,cb){
     newBooking.Amount = amount;
     newBooking.provider = provider;
     newBooking.status = 'live';
-    console.log(newBooking);
     newBooking.save(function (err) {
         if (err){
+            console.log(err);
             cb('Error');
         }else{
             cb('Success');

@@ -8,8 +8,8 @@ module.exports = mongoose.model('Booking', new Schema({
   reqTime : {type: Date, default: Date.now},
   Requester : String,
   ReqService: String,
-  Amount: Number,
+  Amount: String,
   provider:String,
-    status:String
+  status:String
 })
 );

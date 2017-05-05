@@ -115,12 +115,11 @@ exports.loginUser = function (email, password, loginType,cb) {
 };
 
 exports.findUserFromEmail=function(email,cb){
-  console.log('######################'+email);
   User.findOne({email:email},function (err,user) {
       var result={};
       if (err){
         result.result = 'failure';
-        console.log("Error in email fetch");
+        console.log("Error in email fetch",err);
           cb(result);
       }else{
         result.result='success';
